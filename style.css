@@ -1,0 +1,245 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    padding: 20px;
+    display: flex;
+    position: relative;
+    font-family: 'Poppins', Arial;
+    justify-content: center;
+    background: rgb(26,17,57);
+    background: radial-gradient(circle, rgb(68, 43, 155) 0%, rgba(57,9,39,1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.container{
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    flex-direction: column;
+    min-width: 100vw;
+    height: 100vh;
+}
+.texto{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    animation: logoAnimation 2s infinite ease;
+}
+.textNome{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 100px;
+    height: 40px;
+    width: 360px;
+    padding: 5px;
+    transition: 0.2s ease;
+    border-style: none;
+}
+
+.contTexto{
+    margin-top: 10px;
+    display: flex;
+    justify-content: right;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    border-radius: 100px;
+    height: 40px;
+    width: 360px;
+    padding: 5px;
+    transition: 0.2s ease;
+    border-style: none;
+}
+
+.textNome:focus {
+    box-shadow: 0px 0px 20px hsla(0, 0%, 100%, 0.137);
+    border-style: none;
+}
+.contTexto:hover{
+    margin: 20px;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 20px hsla(0, 0%, 100%, 0.137);
+    border-style: none;
+}
+
+#botaoConfirm {
+    position: absolute;
+    font-weight: 900;
+    border-radius: 90px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    background: linear-gradient(to right, rgb(189, 38, 131), #6B0044);
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 5px transparent #32D8E8;
+    animation: fadeIn 0.5s ease;
+}
+#botaoConfirm:hover{
+    scale: 1.1;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0px 0px 20px #32d9e86e;
+    background: linear-gradient(to left, rgb(189, 38, 131), #6B0044);
+}
+
+.logo{
+    display: flex;
+    width: 300px;
+    animation: logoAnimation 2s infinite ease;
+}
+
+.perguntas{
+    padding: 10px;
+    color: rgb(240, 255, 244);
+    border-radius: 30px;
+    background-color: rgba(33, 39, 119, 0.322);
+    width: 50vw;
+    margin: 90px;
+    height: 95%;
+}
+h1{
+    justify-content: center;
+    font-size: 20px;
+}
+
+.botaoComeçar{
+    margin: -40px;
+    font-weight: 900;
+    font-size: 110%;
+    border-radius: 90px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    background: linear-gradient(to right, rgb(189, 38, 131), #6B0044);
+    height: 60px;
+    transition: transform 0.3s ease;
+    border: 5px transparent #32D8E8;
+    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.253);
+}
+
+.botaoComeçar:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    border: 5px solid #ffffff;
+    box-shadow: 0px 0px 20px #32d9e86e;
+    background: linear-gradient(to left, rgb(189, 38, 131), #6B0044);
+
+}
+.divFoto{
+    margin: 80px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 340px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px #0000006e;
+}
+
+.imgprofile{
+    margin-top: -60px;
+    width: 130px;
+    height: 130px;
+    border-radius: 300px;
+    transition: transform 1s ease;
+}
+.imgprofile:hover{
+    border: 5px solid #ffffff;
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 50px #f711ffc2;
+}
+
+.divStatus{
+    margin-top: 220px;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    width: 340px;
+    height: 100px;
+    border-radius: 20px;
+}
+
+.divStatusplus{
+    display: flex;
+    justify-content: space-around;
+    width: 2px;
+    height: 90%;
+    background: #494949;
+    border-radius: 20px;
+}
+.textoSTATUS{
+    color: #3e2a86;
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    width: 130px;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+}
+.textoSTATUS:hover{
+    cursor: pointer;
+    scale: 1.05;
+}
+
+@keyframes logoAnimation{
+    0%{
+        transform: rotate(0deg);
+        scale: 1;
+    }
+    50%{
+        transform: rotate(2deg);
+        filter: brightness(160%);
+        filter:contrast(130%);
+        scale: 1.1;
+    }
+    100%{
+        transform: rotate(0deg);
+        scale: 1;
+    }
+}
+
+@keyframes fadeIn{
+    0%{opacity: 0;}
+    100%{opacity: 100%;}
+}
+
+@media (max-width: 768px) {
+    body{
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    .perguntas {
+        width: 90vw;
+    }
+    .contTexto:focus{
+        margin: 30px;
+        transform: scale(1.02);
+    }
+}

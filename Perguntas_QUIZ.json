@@ -1,0 +1,562 @@
+[
+    {
+        "id": 1,
+        "pergunta": "Na linguagem JavaScript, o que significa a sigla DOM?",
+        "respostas": [
+            {
+                "1": "Document Orientation Module",
+                "2": "Dynamic Object Method",
+                "3": "Data Object Mapping",
+                "4": "Document Object Model"
+            }
+        ],
+        "verdadeira": 4,
+        "explicação": "A sigla 'DOM' significa Document Object Model (Modelo de Objeto de Documento). É uma interface de programação que representa a estrutura de um documento HTML ou XML como uma árvore de objetos, permitindo a manipulação e alteração dinâmica do conteúdo e estrutura da página web com JavaScript. O DOM é essencial para criar páginas web interativas e dinâmicas."
+    },
+    {
+        "id": 2,
+        "pergunta": "O que é o 'undefined' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Uma função incorporada que retorna um valor padrão.",
+                "2": "Um tipo de dado que indica que uma variável não foi inicializada.",
+                "3": "Um operador que verifica se um valor é falso.",
+                "4": "Uma estrutura de dados para armazenar valores nulos."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'undefined' é um tipo de dado que indica que uma variável não foi inicializada. É o valor padrão atribuído a variáveis que são declaradas mas não têm um valor definido."
+    },
+    {
+        "id": 3,
+        "pergunta": "Qual é o propósito do operador '===' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Atribuir um valor a uma variável.",
+                "2": "Comparar valores sem considerar o tipo.",
+                "3": "Incrementar o valor de uma variável.",
+                "4": "Verificar se dois valores são iguais e do mesmo tipo."
+            }
+        ],
+        "verdadeira": 4,
+        "explicação": "O operador '===' verifica se dois valores são iguais e do mesmo tipo, sem realizar conversão de tipo, diferentemente do operador '==' que realiza a conversão de tipo antes da comparação."
+    },
+    {
+        "id": 4,
+        "pergunta": "O que faz a função 'parseInt()' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Cria um novo objeto de tipo inteiro.",
+                "2": "Converte um número em uma string.",
+                "3": "Converte uma string em um número inteiro.",
+                "4": "Analisa uma expressão matemática e retorna o resultado."
+            }
+        ],
+        "verdadeira": 3,
+        "explicação": "A função 'parseInt()' converte uma string em um número inteiro. Ela analisa a string fornecida e retorna o valor numérico correspondente, ignorando qualquer texto que não possa ser convertido."
+    },
+    {
+        "id": 5,
+        "pergunta": "Qual é a diferença entre 'null' e 'undefined' em JavaScript?",
+        "respostas": [
+            {
+                "1": "'null' é um tipo de dado, enquanto 'undefined' é um erro de execução.",
+                "2": "'null' é um valor padrão para todas as variáveis não inicializadas; 'undefined' é uma função incorporada.",
+                "3": "'null' é um valor explicitamente atribuído para indicar ausência de valor; 'undefined' indica que uma variável não foi inicializada.",
+                "4": "'null' e 'undefined' são intercambiáveis e representam a mesma coisa."
+            }
+        ],
+        "verdadeira": 3,
+        "explicação": "'null' é um valor que você atribui explicitamente a uma variável para indicar ausência de valor. 'undefined' é o valor padrão atribuído a variáveis que foram declaradas, mas ainda não foram inicializadas."
+    },
+    {
+        "id": 6,
+        "pergunta": "O que é uma função anônima em JavaScript?",
+        "respostas": [
+            {
+                "1": "Uma função sem um nome definido, geralmente atribuída a uma variável ou passada como argumento.",
+                "2": "Uma função que não possui parâmetros.",
+                "3": "Uma função que é chamada automaticamente durante a execução do código.",
+                "4": "Uma função que retorna um valor padrão."
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "Uma função anônima é uma função que não tem um nome definido e é frequentemente usada como um valor em expressões ou passada como argumento para outras funções."
+    },
+    {
+        "id": 7,
+        "pergunta": "Qual é a principal diferença entre 'var', 'let' e 'const' em JavaScript?",
+        "respostas": [
+            {
+                "1": "'var' e 'const' são usados para variáveis globais; 'let' é para variáveis locais.",
+                "2": "'var' tem escopo de função, 'let' e 'const' têm escopo de bloco; 'const' não pode ser reatribuído.",
+                "3": "'var' e 'let' podem ser reatribuídos, enquanto 'const' não pode; 'var' tem escopo de bloco e 'let' tem escopo global.",
+                "4": "'var' é obsoleto, 'let' e 'const' são usados para declarar constantes."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'var' tem escopo de função, enquanto 'let' e 'const' têm escopo de bloco. 'const' é utilizado para valores que não devem ser reatribuídos, enquanto 'let' e 'var' permitem reatribuição."
+    },
+    {
+        "id": 8,
+        "pergunta": "O que é o 'hoisting' em JavaScript?",
+        "respostas": [
+            {
+                "1": "O processo de transformação de código ECMAScript 6 para ECMAScript 5.",
+                "2": "Uma técnica para otimizar o desempenho de loops.",
+                "3": "A prática de manter variáveis e funções dentro de um bloco de código.",
+                "4": "O comportamento em que declarações de variáveis e funções são movidas para o topo do seu escopo durante a execução."
+            }
+        ],
+        "verdadeira": 4,
+        "explicação": "'Hoisting' é o comportamento onde declarações de variáveis e funções são movidas para o topo de seu escopo durante a execução, permitindo que possam ser usadas antes de serem declaradas no código."
+    },
+    {
+        "id": 9,
+        "pergunta": "Como você pode criar um objeto em JavaScript?",
+        "respostas": [
+            {
+                "1": "Através da função 'Object.create()' somente.",
+                "2": "Com a função 'Object.define()' apenas.",
+                "3": "Usando a sintaxe de literal de objeto ou o construtor 'new Object()'.",
+                "4": "Usando o operador 'new' com uma função construtora."
+            }
+        ],
+        "verdadeira": 3,
+        "explicação": "Você pode criar um objeto em JavaScript usando a sintaxe de literal de objeto (por exemplo, `{}`) ou o construtor 'new Object()'."
+    },
+    {
+        "id": 10,
+        "pergunta": "O que é uma 'Promise' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Uma técnica para otimizar o tempo de execução de loops.",
+                "2": "Uma função que executa um código de maneira síncrona.",
+                "3": "Uma forma de declarar variáveis que podem ser alteradas no futuro.",
+                "4": "Um objeto que representa a eventual conclusão (ou falha) de uma operação assíncrona."
+            }
+        ],
+        "verdadeira": 4,
+        "explicação": "Uma 'Promise' é um objeto que representa a eventual conclusão ou falha de uma operação assíncrona e seu resultado. Ele permite lidar com operações assíncronas de maneira mais gerenciável."
+    },
+    {
+        "id": 11,
+        "pergunta": "Qual é a função do método 'Array.prototype.map()' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Filtra o array, retornando apenas os elementos que atendem a uma condição específica.",
+                "2": "Cria um novo array com os resultados da aplicação de uma função a cada elemento do array original.",
+                "3": "Ordena os elementos do array em ordem crescente.",
+                "4": "Modifica o array original, removendo elementos que não atendem a uma condição."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'Array.prototype.map()' cria um novo array com os resultados da aplicação de uma função a cada elemento do array original, sem modificar o array original."
+    },
+    {
+        "id": 12,
+        "pergunta": "O que faz o operador 'typeof' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Retorna uma string que indica o tipo do operando.",
+                "2": "Cria uma nova variável com um tipo específico.",
+                "3": "Converte um valor para um tipo específico.",
+                "4": "Analisa uma expressão matemática e retorna o resultado."
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "O operador 'typeof' retorna uma string que indica o tipo do operando, permitindo identificar se uma variável é um número, string, objeto, etc."
+    },
+    {
+        "id": 13,
+        "pergunta": "Qual é o resultado de '5 + '5'' em JavaScript?",
+        "respostas": [
+            {
+                "1": "10",
+                "2": "55",
+                "3": "undefined",
+                "4": "Error"
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'5 + '5'' resulta em '55' porque o operador '+' é usado para concatenação de strings quando um dos operandos é uma string."
+    },
+    {
+        "id": 14,
+        "pergunta": "Qual método você usaria para adicionar um item no final de um array?",
+        "respostas": [
+            {
+                "1": "array.unshift()",
+                "2": "array.push()",
+                "3": "array.pop()",
+                "4": "array.shift()"
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'array.push()' adiciona um ou mais itens ao final de um array e retorna o novo comprimento do array."
+    },
+    {
+        "id": 15,
+        "pergunta": "Como você declara uma variável em JavaScript?",
+        "respostas": [
+            {
+                "1": "var nome;",
+                "2": "variable nome;",
+                "3": "let nome;",
+                "4": "const nome;"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "Você pode declarar uma variável em JavaScript usando 'var', 'let' ou 'const'. 'var' é uma forma antiga de declaração que ainda é válida."
+    },
+    {
+        "id": 16,
+        "pergunta": "O que faz o método 'String.prototype.toUpperCase()'?",
+        "respostas": [
+            {
+                "1": "Converte todos os caracteres de uma string para minúsculas.",
+                "2": "Retorna uma nova string com todos os caracteres em maiúsculas.",
+                "3": "Remove espaços em branco do início e do fim de uma string.",
+                "4": "Substitui todas as ocorrências de um caractere em uma string."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'toUpperCase()' retorna uma nova string com todos os caracteres convertidos para maiúsculas."
+    },
+    {
+        "id": 17,
+        "pergunta": "Qual é a diferença entre '==' e '===' em JavaScript?",
+        "respostas": [
+            {
+                "1": "'==' compara valores e tipos, enquanto '===' compara apenas valores.",
+                "2": "'==' realiza uma conversão de tipo antes de comparar, enquanto '===' compara sem conversão de tipo.",
+                "3": "'==' verifica se dois objetos são iguais, enquanto '===' verifica apenas o valor.",
+                "4": "'==' é usado para igualdade, enquanto '===' é usado para atribuição."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'==' realiza uma conversão de tipo antes de comparar os valores, enquanto '===' compara tanto o valor quanto o tipo sem conversão."
+    },
+    {
+        "id": 18,
+        "pergunta": "O que faz o método 'Array.prototype.filter()'?",
+        "respostas": [
+            {
+                "1": "Cria um novo array com todos os elementos que atendem a uma condição específica.",
+                "2": "Adiciona elementos ao final de um array.",
+                "3": "Remove o último elemento de um array.",
+                "4": "Ordena os elementos de um array em ordem crescente."
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "O método 'filter()' cria um novo array com todos os elementos que passam em um teste fornecido por uma função."
+    },
+    {
+        "id": 19,
+        "pergunta": "Como você faz um comentário de linha única em JavaScript?",
+        "respostas": [
+            {
+                "1": "'<!-- comentário -->'",
+                "2": "'/* comentário */'",
+                "3": "'// comentário'",
+                "4": "'# comentário'"
+            }
+        ],
+        "verdadeira": 3,
+        "explicação": "Comentários de linha única em JavaScript são feitos com '//' seguido pelo texto do comentário."
+    },
+    {
+        "id": 20,
+        "pergunta": "Qual é o resultado de 'typeof []' em JavaScript?",
+        "respostas": [
+            {
+                "1": "'array'",
+                "2": "'object'",
+                "3": "'list'",
+                "4": "'undefined'"
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "Em JavaScript, 'typeof []' retorna 'object' porque arrays são considerados objetos."
+    },
+    {
+        "id": 21,
+        "pergunta": "O que faz o método 'String.prototype.trim()'?",
+        "respostas": [
+            {
+                "1": "Remove todos os espaços dentro da string.",
+                "2": "Remove espaços em branco do início e do fim da string.",
+                "3": "Converte a string para um array de caracteres.",
+                "4": "Substitui espaços em branco por um caractere específico."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'trim()' remove espaços em branco do início e do fim de uma string."
+    },
+    {
+        "id": 22,
+        "pergunta": "Qual método você usaria para verificar se uma string contém uma substring específica?",
+        "respostas": [
+            {
+                "1": "string.includes()",
+                "2": "string.has()",
+                "3": "string.contains()",
+                "4": "string.indexOf()"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "O método 'includes()' verifica se uma string contém uma substring específica e retorna 'true' ou 'false'."
+    },
+    {
+        "id": 23,
+        "pergunta": "Como você define uma função em JavaScript?",
+        "respostas": [
+            {
+                "1": "function minhaFuncao() {}",
+                "2": "define minhaFuncao() {}",
+                "3": "create minhaFuncao() {}",
+                "4": "func minhaFuncao() {}"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "Funções em JavaScript são definidas usando a palavra-chave 'function', seguida pelo nome da função e um bloco de código."
+    },
+    {
+        "id": 24,
+        "pergunta": "O que faz o método 'Array.prototype.reduce()'?",
+        "respostas": [
+            {
+                "1": "Cria um novo array com os resultados da aplicação de uma função a cada elemento.",
+                "2": "Reduz um array a um único valor com base em uma função acumuladora.",
+                "3": "Filtra os elementos do array com base em uma condição.",
+                "4": "Adiciona um item ao início do array."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'reduce()' aplica uma função acumuladora a cada elemento de um array, resultando em um único valor."
+    },
+    {
+        "id": 25,
+        "pergunta": "Qual é a função do operador '!' em JavaScript?",
+        "respostas": [
+            {
+                "1": "Converte um valor para um tipo booleano.",
+                "2": "Inverte o valor booleano (negação).",
+                "3": "Atribui um valor a uma variável.",
+                "4": "Verifica a igualdade entre dois valores."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O operador '!' é o operador de negação lógica, que inverte o valor booleano de seu operando."
+    },
+    {
+        "id": 26,
+        "pergunta": "Como você cria um objeto literal em JavaScript?",
+        "respostas": [
+            {
+                "1": "var obj = new Object();",
+                "2": "var obj = {};",
+                "3": "var obj = Object.create();",
+                "4": "var obj = create Object();"
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "Objetos literais são criados usando a sintaxe de chaves '{}'."
+    },
+    {
+        "id": 27,
+        "pergunta": "O que faz o método 'Array.prototype.find()'?",
+        "respostas": [
+            {
+                "1": "Encontra o índice do primeiro elemento que satisfaz a condição.",
+                "2": "Encontra e retorna o primeiro elemento que satisfaz a condição.",
+                "3": "Remove todos os elementos que não atendem a uma condição.",
+                "4": "Cria um novo array com elementos que atendem a uma condição."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "O método 'find()' retorna o primeiro elemento do array que satisfaz a condição fornecida por uma função de teste."
+    },
+    {
+        "id": 28,
+        "pergunta": "Qual é a saída de 'console.log(2 + 3 + '5')'?",
+        "respostas": [
+            {
+                "1": "'55'",
+                "2": "'75'",
+                "3": "7",
+                "4": "'5'"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "A expressão '2 + 3 + '5'' é avaliada como '5' concatenado a '5', resultando em '55'."
+    },
+    {
+        "id": 29,
+        "pergunta": "Como você acessa o primeiro elemento de um array?",
+        "respostas": [
+            {
+                "1": "array[0]",
+                "2": "array.first()",
+                "3": "array.get(0)",
+                "4": "array[1]"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "O primeiro elemento de um array é acessado pelo índice 0, como em 'array[0]'."
+    },
+    {
+        "id": 30,
+        "pergunta": "Qual é o resultado de '3 == 3.0' em JavaScript?",
+        "respostas": [
+            {
+                "1": "true",
+                "2": "false",
+                "3": "undefined",
+                "4": "NaN"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "'3 == 3.0' resulta em 'true' porque o operador '==' compara apenas os valores e não se importa com o tipo."
+    },
+    {
+        "id": 31,
+        "pergunta": "Qual é o propósito do método 'Array.prototype.slice()'?",
+        "respostas": [
+            {
+                "1": "Remove elementos do início e do fim do array.",
+                "2": "Cria uma cópia superficial de uma parte do array.",
+                "3": "Adiciona novos elementos ao final do array.",
+                "4": "Substitui todos os elementos do array."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'slice()' retorna uma cópia superficial de uma parte do array sem modificar o array original."
+    },
+    {
+        "id": 32,
+        "pergunta": "Qual é a saída de 'console.log(typeof null)'?",
+        "respostas": [
+            {
+                "1": "'object'",
+                "2": "'null'",
+                "3": "'undefined'",
+                "4": "'boolean'"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "Em JavaScript, 'typeof null' retorna 'object', o que é considerado um bug histórico na linguagem."
+    },
+    {
+        "id": 33,
+        "pergunta": "O que faz o método 'String.prototype.replace()'?",
+        "respostas": [
+            {
+                "1": "Substitui todas as ocorrências de uma substring por outra.",
+                "2": "Remove uma substring específica.",
+                "3": "Substitui a primeira ocorrência de uma substring por outra.",
+                "4": "Adiciona uma substring ao final da string."
+            }
+        ],
+        "verdadeira": 3,
+        "explicação": "'replace()' substitui a primeira ocorrência de uma substring ou expressão regular por outra string."
+    },
+    {
+        "id": 34,
+        "pergunta": "Qual é o propósito do método 'Object.keys()'?",
+        "respostas": [
+            {
+                "1": "Retorna uma lista de todos os valores de um objeto.",
+                "2": "Retorna uma lista de todas as chaves de um objeto.",
+                "3": "Cria um novo objeto com chaves e valores invertidos.",
+                "4": "Adiciona uma nova chave a um objeto."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'Object.keys()' retorna um array contendo todas as chaves (ou propriedades) próprias enumeráveis de um objeto."
+    },
+    {
+        "id": 35,
+        "pergunta": "Como você verifica se uma variável é um array?",
+        "respostas": [
+            {
+                "1": "Array.isArray()",
+                "2": "typeof array === 'array'",
+                "3": "array instanceof Array",
+                "4": "array.constructor === Array"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "A função 'Array.isArray()' é usada para verificar se um valor é um array."
+    },
+    {
+        "id": 36,
+        "pergunta": "Qual é o resultado de 'console.log([] == ![])'?",
+        "respostas": [
+            {
+                "1": "true",
+                "2": "false",
+                "3": "undefined",
+                "4": "NaN"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "A expressão '[] == ![]' é avaliada como 'true' porque '!' converte o array em um valor booleano e, em seguida, é comparado com um array vazio."
+    },
+    {
+        "id": 37,
+        "pergunta": "O que faz o método 'Array.prototype.concat()'?",
+        "respostas": [
+            {
+                "1": "Adiciona elementos ao início de um array.",
+                "2": "Cria um novo array concatenando arrays e/ou valores.",
+                "3": "Remove elementos do final de um array.",
+                "4": "Filtra elementos com base em uma condição."
+            }
+        ],
+        "verdadeira": 2,
+        "explicação": "'concat()' cria um novo array com os elementos dos arrays e/ou valores passados como argumentos."
+    },
+    {
+        "id": 38,
+        "pergunta": "Qual é a sintaxe para criar um loop 'for' em JavaScript?",
+        "respostas": [
+            {
+                "1": "for (var i = 0; i < 10; i++) {}",
+                "2": "loop (var i = 0; i < 10; i++) {}",
+                "3": "for (i = 0; i < 10; i++) {}",
+                "4": "repeat (var i = 0; i < 10; i++) {}"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "A sintaxe para criar um loop 'for' é 'for (var i = 0; i < 10; i++) {}', onde você define a variável inicial, condição e incremento."
+    },
+    {
+        "id": 39,
+        "pergunta": "Como você faz a conversão de uma string para número em JavaScript?",
+        "respostas": [
+            {
+                "1": "parseInt() ou parseFloat()",
+                "2": "toNumber()",
+                "3": "convertToNumber()",
+                "4": "stringToNumber()"
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "Você pode usar 'parseInt()' para converter uma string em um número inteiro ou 'parseFloat()' para um número de ponto flutuante."
+    },
+    {
+        "id": 40,
+        "pergunta": "O que faz o método 'Object.assign()'?",
+        "respostas": [
+            {
+                "1": "Cria um novo objeto com propriedades copiadas de um ou mais objetos de origem.",
+                "2": "Remove propriedades de um objeto.",
+                "3": "Adiciona uma nova propriedade a um objeto.",
+                "4": "Atualiza o protótipo de um objeto."
+            }
+        ],
+        "verdadeira": 1,
+        "explicação": "'Object.assign()' copia as propriedades de um ou mais objetos de origem para um objeto destino e retorna o objeto destino."
+    }
+]
