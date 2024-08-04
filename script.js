@@ -98,7 +98,7 @@ function Register(){
     })
 }
 
-function AdicionarFoto(inputNome){
+function AdicionarFoto(){
     ApagarTela();
     const titulo = document.createElement('h1');
     contTexto.setAttribute('class', 'contTexto');
@@ -110,7 +110,7 @@ function AdicionarFoto(inputNome){
     divFoto = document.createElement('div');
     divFoto.setAttribute('class', 'divFoto');
     container.appendChild(divFoto);
-
+    divFoto.style.margin='0px';
     var img = renderizarFoto();
 
     botaoEnviar = document.createElement('div');
@@ -164,6 +164,7 @@ function BemVindo(){
     divFoto.setAttribute('class', 'divFoto');
     divFoto.style.height= '300px';
     divFoto.style.width= '360px';
+    divFoto.style.margin='80px';
     divFoto.style.background= '#ffffff71';
     container.appendChild(divFoto);
 

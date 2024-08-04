@@ -147,7 +147,7 @@ h1{
 
 }
 .divFoto{
-    margin: 80px;
+    margin: 0px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -245,5 +245,8 @@ h1{
     .contTexto:focus{
         margin: 30px;
         transform: scale(1.02);
+    }
+    .texto{
+        font-size: 25px;
     }
 }
