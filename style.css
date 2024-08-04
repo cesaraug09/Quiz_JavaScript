@@ -230,6 +230,9 @@ h1{
 }
 
 @media (max-width: 768px) {
+    .container {
+        width: 100vw;
+    }
     body{
         overflow: hidden;
         margin: 0;
