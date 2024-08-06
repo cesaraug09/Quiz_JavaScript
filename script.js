@@ -86,9 +86,7 @@ function Register(){
         })
 
     botaoOk.addEventListener('click', function(){
-        if(inputNome.value==''){
-            alert('Por favor, digite seu nome para continuar');
-        }else{
+        if(inputNome.value!=''){
             localStorage.setItem('nomeGuardado', `${inputNome.value}`);
                 AdicionarFoto(inputNome);
         }
@@ -313,6 +311,8 @@ async function PLAY(){
             questoes++;
             j++;
                 PLAY();
+        } else{
+            BemVindo();
         }
     })
 }
@@ -357,14 +357,38 @@ settingsbtn.addEventListener('click', function(){
     if(settingsclick==false){
         naoclicavel.style.width='100%';
         naoclicavel.style.height='100%';
-        naoclicavel.style.background='#91919128';
 
         menu = document.createElement('div');
         menu.setAttribute('class', 'divFoto');
-        menu.style.background='#CAC4DE';
+        menu.style.background='#7B7787';
         menu.style.boxShadow='0px 0px 90px black';
         menu.style.position = "absolute";
         naoclicavel.appendChild(menu);
+
+        botaoStart = document.createElement('div');
+            botaoStart.innerHTML = `Mudo`;
+                botaoStart.setAttribute('class', 'botaoComeçar');
+                    menu.appendChild(botaoStart);
+
+                    botaoStart = document.createElement('div');
+                botaoStart.innerHTML = `Mudar Tema`;
+            botaoStart.setAttribute('class', 'botaoComeçar');
+        menu.appendChild(botaoStart);
+
+        botaoSair = document.createElement('div');
+            botaoSair.innerHTML = `Deslogar da conta`;
+                botaoSair.setAttribute('class', 'botaoComeçar');
+                    menu.appendChild(botaoSair);
+
+                    botaoSair.addEventListener('click', function(){
+                        ApagarTela();
+                        localStorage.clear();
+                        naoclicavel.removeChild(menu);
+                        naoclicavel.style.width='0%';
+                        naoclicavel.style.height='0%';
+                        settingsclick = false;
+                        location.reload();
+                    })
 
         settingsclick = true;
     } else{
