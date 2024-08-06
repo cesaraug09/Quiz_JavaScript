@@ -14,8 +14,7 @@ body{
     position: relative;
     font-family: 'Poppins', Arial;
     justify-content: center;
-    background: rgb(26,17,57);
-    background: radial-gradient(circle, rgb(68, 43, 155) 0%, rgba(57,9,39,1) 100%);
+    background: linear-gradient(to left, rgb(23, 3, 36), rgb(9, 24, 46));
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -36,13 +35,14 @@ body{
     justify-content: center;
     color: white;
     font-size: 30px;
-    animation: logoAnimation 2s infinite ease;
+    animation: textFade 0.2s ease-in;
 }
 .textNome{
+    color: white;
     display: flex;
     justify-content: center;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400;
     border-radius: 100px;
     height: 40px;
@@ -50,6 +50,7 @@ body{
     padding: 5px;
     transition: 0.2s ease;
     border-style: none;
+    background: #8435DE;
 }
 
 .contTexto{
@@ -87,18 +88,16 @@ body{
     justify-content: center;
     align-items: center;
     width: 80px;
-    background: linear-gradient(to right, rgb(189, 38, 131), #6B0044);
     height: 40px;
+    background: #3E0D6F;
     transition: transform 0.3s ease;
-    border: 5px transparent #32D8E8;
     animation: fadeIn 0.5s ease;
 }
 #botaoConfirm:hover{
-    scale: 1.1;
+    transform: scale(1.1);
     cursor: pointer;
-    border: 2px solid #ffffff;
+    border: 1px solid #ffffff93;
     box-shadow: 0px 0px 20px #32d9e86e;
-    background: linear-gradient(to left, rgb(189, 38, 131), #6B0044);
 }
 
 .logo{
@@ -123,29 +122,24 @@ h1{
 
 .botaoComeçar{
     margin: -40px;
-    font-weight: 900;
     font-size: 110%;
-    border-radius: 90px;
+    border-radius: 20px;
     color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    background: linear-gradient(to right, rgb(189, 38, 131), #6B0044);
-    height: 60px;
+    width: 300px;
+    background: #3A0E6F;
+    height: 50px;
     transition: transform 0.3s ease;
     border: 5px transparent #32D8E8;
-    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.253);
 }
 
 .botaoComeçar:hover{
     cursor: pointer;
-    transform: scale(1.2);
-    border: 5px solid #ffffff;
-    box-shadow: 0px 0px 20px #32d9e86e;
-    background: linear-gradient(to left, rgb(189, 38, 131), #6B0044);
-
+    border: 2px solid #ffffff96;
 }
+
 .divFoto{
     margin: 0px;
     display: flex;
@@ -154,12 +148,15 @@ h1{
     flex-direction: column;
     width: 340px;
     height: 400px;
-    background: rgba(255, 255, 255, 0.24);
-    border-radius: 20px;
+    background: #ffffff5e;
+    border-radius: 10px;
     box-shadow: 0px 0px 10px #0000006e;
 }
 
 .imgprofile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: -60px;
     width: 130px;
     height: 130px;
@@ -167,10 +164,9 @@ h1{
     transition: transform 1s ease;
 }
 .imgprofile:hover{
-    border: 5px solid #ffffff;
+    border: 2px solid #ffffff;
     cursor: pointer;
-    transform: scale(1.1);
-    box-shadow: 0px 0px 50px #f711ffc2;
+    box-shadow: 0px 0px 30px #f711ff6c;
 }
 
 .divStatus{
@@ -206,6 +202,48 @@ h1{
 .textoSTATUS:hover{
     cursor: pointer;
     scale: 1.05;
+}
+
+.divPerguntas{
+    padding: 20px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background-color: #6120aa;
+    border-radius: 10px;
+}
+
+.carregando{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 30px;
+    border: 1px solid #ffffff8f;
+    width:330px;
+    height: 30px;
+    border-radius: 90px;
+}
+.carregado{
+    margin-left: 3px;
+    background: linear-gradient(to right, rgb(38, 156, 38), rgb(27, 192, 27));
+    right: 0px;
+    width:0%;
+    height: 80%;
+    border-radius: 90px;
+}
+
+@keyframes textFade {
+    0%{
+        opacity: 0%;
+        scale: 0.95;
+    }
+    100%{
+        opacity: 100%;
+        scale: 1;
+
+    }
 }
 
 @keyframes logoAnimation{
@@ -244,6 +282,9 @@ h1{
     }
     .contTexto:focus{
         margin: 30px;
+        transform: scale(1.02);
+    }
+    .contTexto:hover{
         transform: scale(1.02);
     }
     .texto{
