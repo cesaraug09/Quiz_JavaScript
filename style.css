@@ -39,7 +39,7 @@ body{
     transition: 0.5s ease;
     }
 .areanoclick{
-    background: rgba(10, 2, 20, 0.588);
+    background: rgba(0, 0, 0, 0.219);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +164,7 @@ h1{
     justify-content: center;
     align-items: center;
     width: 300px;
-    background: #3A0E6F;
+    background: #1E1F22;
     height: 50px;
     transition: transform 0.3s ease;
     border: 5px transparent #32D8E8;

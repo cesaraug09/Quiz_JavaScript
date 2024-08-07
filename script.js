@@ -10,24 +10,30 @@ var linkFotoUser;
 const container = document.querySelector('.container');
 let settingsbtn = document.querySelector('.icoconfig img');
 let settingsarea = document.querySelector('.areanoclick');
-
+let icone = document.getElementById('cog');
 let settingsclick = false;
 let vetorContadordeDias = [];
+let prosseguir = 'false';
+let CorBotaoPrincipal;
+let CorBotaoSecundario;
+let CorDivPrincipal;
+let CorDivSecundaria;
+let CorTextoPrincipal;
+let CorTextoSecundario;
 
-let CorBotaoPrincipal = '#3A0E6F';
-let CorBotaoSecundario = 'linear-gradient(to right, rgb(27, 192, 27), rgb(38, 156, 38))';
-let CorDivPrincipal = '#7B7787';
-let CorDivSecundaria = '#6120AA';
-let CorTextoPrincipal = '#FFFFFF';
-let CorTextoSecundario = '#3E2A86';
 const naoclicavel = document.querySelector('.areanoclick');
-
 
 let agora = new Date();
 let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
 
 main();
 ////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
+if(localStorage.getItem('Tema')!='Padrão' && localStorage.getItem('Tema')!='Dark'){
+    localStorage.setItem('Questoes', 0); ////// mudar de lugar depois
+    localStorage.setItem('VetorQuestoesDiarias', 0); ////// mudar de lugar depois
+    localStorage.setItem('Tema','Padrão');
+    MudarTema();
+}
 
 localStorage.setItem('lvlUser', '0');
 localStorage.setItem('diasCont', '0');
@@ -37,11 +43,12 @@ function RegistraDiasJogados(){
     vetorContadordeDias = parseInt(localStorage.getItem('DiasJogados'));
     if(!vetorContadordeDias.includes(diaHoje)){
         vetorContadordeDias.push(diaHoje);
+        console.log(vetorContadordeDias)
     }
 }
 
-function RegistraQuestoesRespondidas(num){
-    localStorage.setItem('Questoes',  num);
+function RegistraQuestoesRespondidas(questoes){
+    localStorage.setItem('Questoes',  questoes);
     console.log(localStorage.getItem('Questoes'))
 }
 
@@ -133,7 +140,25 @@ function Imprime(tipo, texto, classe, ElementoPai, corText, corBackGround){
     ElementoPai.appendChild(div);
     return div;
 }
+function MudarTema(){
+    if(localStorage.getItem('Tema')!='Dark'){
+        Cores('linear-gradient(to left, rgb(23, 3, 36), rgb(9, 24, 46))', '#3A0E6F','linear-gradient(to right, rgb(27, 192, 27), rgb(38, 156, 38))', '#7B7787', '#6120AA', '#FFFFFF', '#3E2A86');
+        icone.src = 'cog-solid-44.png';
+    } else{
+        Cores('#0E0E0E', '#4A4D54','#5662F4', '#313338', '#313338', '#F2F3F5', '#688DA4');
+        icone.src = 'cog-solid-22.png';
+    }
 
+}
+function Cores(fundo, cbp, cbs, cdp, cds, ct1, ct2){
+    document.body.style.background = fundo;
+    CorBotaoPrincipal = cbp;
+    CorBotaoSecundario = cbs;
+    CorDivPrincipal = cdp;
+    CorDivSecundaria = cds;
+    CorTextoPrincipal = ct1;
+    CorTextoSecundario = ct2;
+}
 
 function ImprimeTexto(texto,classe,ElementoPai, corText){
     const titulo = document.createElement('h1');
@@ -305,19 +330,28 @@ function EscolhaAlternativa(){
     btn2 = GeraAlternativas(2, alternativa2);
     btn3 = GeraAlternativas(3, alternativa3);
     btn4 = GeraAlternativas(4, alternativa4);
-
     btn1.addEventListener('click', function(){
-        alert('clicou no 1');
+        BtnProsseguir(btn1);
     })
     btn2.addEventListener('click', function(){
-        alert('clicou no 2');
+        BtnProsseguir(btn2);
     })
     btn3.addEventListener('click', function(){
-        alert('clicou no 3');
+        BtnProsseguir(btn3);
     })
     btn4.addEventListener('click', function(){
-        alert('clicou no 4');
+        BtnProsseguir(btn4);
     })
+}
+
+function BtnProsseguir(btn){
+    btn1.style.background = CorBotaoPrincipal;
+    btn2.style.background = CorBotaoPrincipal;
+    btn3.style.background = CorBotaoPrincipal;
+    btn4.style.background = CorBotaoPrincipal;
+    btn.style.background = CorTextoSecundario;
+    prosseguir = true;
+    Proximo.style.opacity='100%';
 }
 
 async function PLAY(){
@@ -342,6 +376,7 @@ async function PLAY(){
     EscolhaAlternativa();
 
     BotoesProxx();
+
 }
 
 function DivdosBotoes(){
@@ -355,6 +390,9 @@ function DivdosBotoes(){
 }
 
 function BotoesProxx(){
+
+    prosseguir = false;
+
     DivBotoes = DivdosBotoes();
 
     Anterior = Imprime('div', 'Voltar', 'botaoComeçar', divBotoes, CorTextoPrincipal, CorBotaoPrincipal);
@@ -362,6 +400,12 @@ function BotoesProxx(){
 
     Proximo = Imprime('div', 'Próximo', 'botaoComeçar', divBotoes, CorTextoPrincipal, CorBotaoPrincipal);
     Proximo.style.width='45%';
+    Proximo.style.opacity='35%';
+
+    if(questoes<localStorage.getItem('Questoes')){
+        prosseguir = true;
+        Proximo.style.opacity='100%';
+    }
 
     Anterior.addEventListener('click', function(){
         if(questoes>0){
@@ -369,13 +413,13 @@ function BotoesProxx(){
                 PLAY();
         }})
     Proximo.addEventListener('click', function(){
-        if(questoes<9){
+        if(questoes<9 && prosseguir==true){
             questoes++;
-            if(questoes>=parseInt(localStorage.getItem('Questoes'))){
+            if(questoes>parseInt(localStorage.getItem('Questoes'))){
                 RegistraQuestoesRespondidas(questoes);
             }
             PLAY();
-        } else{
+        } else if(questoes==9){
             BemVindo();
         }
     })
@@ -398,35 +442,49 @@ function ChamaMenu(){
 
         titulo = ImprimeTexto(`Configurações`, 'texto', menu, CorTextoPrincipal);
 
-        btnMudarTema = Imprime('div',`Mudar Tema`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
-        btnTrocaNick = Imprime('div',`Trocar nickname`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
-        btnSair = Imprime('div',`Deslogar da conta`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
+        btnMudarTema = Imprime('div',`Tema: ${localStorage.getItem('Tema')}`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
+        btnTrocaNick = Imprime('div',`Alterar nome`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
+        btnSair = Imprime('div',`Sair`, 'botaoComeçar', menu, CorTextoPrincipal, '#474747');
 
-    btnSair.addEventListener('click', function(){
+    btnMudarTema.addEventListener('click', function(){
+        if(localStorage.getItem('Tema') == 'Padrão'){
+            localStorage.setItem('Tema', 'Dark');
+        } else{
+            localStorage.setItem('Tema', 'Padrão');
+        }
         ApagarTela();
-         LimpaLocalStorage();
-    })
-
-    btnTrocaNick.addEventListener('click', function(){
-        Register();
+        MudarTema();
         FechaMenu();
+        BemVindo();
+    })
+    btnTrocaNick.addEventListener('click', function(){
+            Register();
+            FechaMenu();
         })
-    settingsclick = true;
+        settingsclick = true;
     } else{
-    FechaMenu();
+        FechaMenu();
     }
+    btnSair.addEventListener('click', function(){
+        if(confirm("Deseja sair da conta? todo o progresso será perdido!")){
+            ApagarTela();
+         LimpaLocalStorage();
+        } else{
+            FechaMenu();
+        }
+    })
 }
 
 function FechaMenu(){
     naoclicavel.removeChild(menu)
     naoclicavel.style.width='0%';
-    naoclicavel.style.height='0%';
+    naoclicavel.style.height='0vw';
     settingsclick = false;
 }
 
 async function main(){
-    let a = obterPerguntaJSON();
-    console.log(a)
+    MudarTema();
+    obterPerguntaJSON();
     TelaComeçar();
     GerarQuestoesAleatorias();
 }
