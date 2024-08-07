@@ -21,6 +21,7 @@ body{
     overflow: hidden;
 }
 .icoconfig{
+    margin: 10px;
     opacity: 40%;
     display: flex;
     position: absolute;
@@ -35,7 +36,7 @@ body{
     position: absolute;
     width: 50px;
     transition: 0.5s ease;
-}
+    }
 .areanoclick{
     background: rgba(10, 2, 20, 0.588);
     display: flex;
@@ -166,6 +167,10 @@ h1{
     height: 50px;
     transition: transform 0.3s ease;
     border: 5px transparent #32D8E8;
+    max-width: 340px;
+    overflow: hidden;
+    padding: 20px;
+    max-width: 100%;
 }
 
 .botaoComeçar:hover{
@@ -193,8 +198,14 @@ h1{
     margin-top: -60px;
     width: 130px;
     height: 130px;
-    border-radius: 300px;
+    border-radius: 50%;
     transition: transform 1s ease;
+    overflow: hidden;
+}
+.imgprofile img{
+    width: auto;
+    height: auto;
+    object-fit: cover;
 }
 .imgprofile:hover{
     border: 2px solid #ffffff;
@@ -241,7 +252,6 @@ h1{
     max-width: 370px;
     padding: 20px 10px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
@@ -260,6 +270,7 @@ h1{
     border-radius: 90px;
 }
 .carregado{
+    transition: 2s ease;
     margin-left: 3px;
     background: linear-gradient(to right, rgb(38, 156, 38), rgb(27, 192, 27));
     right: 0px;
@@ -331,6 +342,9 @@ h1{
     }
     .texto{
         font-size: 25px;
+    }
+    .icoconfig{
+        margin: 0px;
     }
     .icoconfig img{
         margin: 0;

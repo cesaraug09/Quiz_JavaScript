@@ -1,25 +1,48 @@
 let min = 1; let max = 40;
 let questoes = 0;
 let pergunta;
-var k = 0;
-let j=0;
 let vetor = [];
 let vetorPerguntas = [];
 let alternativasA=[];
 let alternativasB=[];
 let alternativasC=[];
 let alternativasD=[];
-let i = 0;
 const container = document.querySelector('.container');
 var linkFotoUser;
 let porcentagemCarregado = 0;
 let settingsbtn = document.querySelector('.icoconfig img');
 let settingsarea = document.querySelector('.areanoclick');
 let settingsclick = false;
-localStorage.getItem('lvlUser');
-localStorage.getItem('diasCont');
-localStorage.getItem('porcAcertos');
+let vetorContadordeDias = [];
 
+let agora = new Date();
+let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
+
+if(!localStorage.getItem('PrimeiroDiaJogado')){
+    console.log("nao tem nada");
+    localStorage.setItem('PrimeiroDiaJogado', diaHoje);
+    localStorage.setItem('DiasJogados', diaHoje);
+    vetorContadordeDias.push(diaHoje)
+    console.log(vetorContadordeDias)
+}
+
+function RegistraDiasJogados(){
+    vetorContadordeDias = parseInt(localStorage.getItem('DiasJogados'));
+    console.log(vetorContadordeDias)
+    if(!vetorContadordeDias.includes(diaHoje)){
+        vetorContadordeDias.push(diaHoje);
+    }
+    console.log('esses sao os dias jogados')
+    console.log(vetorContadordeDias)
+}
+
+function RegistraQuestoesRespondidas(num){
+    localStorage.setItem('Questoes',  num);
+}
+
+
+
+obterPergunta();
 main();
 
 function RegistrarUsuario(){
@@ -31,13 +54,15 @@ function obterNumeroAleatorio(min, max) {
 }
 
 function GerarQuestoesAleatorias() {
-    while (i < 10) {
+    while (questoes < 10){
         let RandomID = obterNumeroAleatorio(min, max);
         if (!vetor.includes(RandomID)) {
-            vetor[i] = RandomID;
-            i++;
+            vetor[questoes] = RandomID;
+            questoes++;
+            console.log(vetor);
         }
     }
+    questoes=0;
 }
 
 function TelaComeçar(){
@@ -225,33 +250,41 @@ function BemVindo(){
 }
 
 async function obterPergunta(){
-        let k=0;
         const response = await fetch("quiz.json");
         const quiz = await response.json();
-        while(k<10){
-            if(response.ok){
-                vetorPerguntas[k] = await quiz[vetor[k]].pergunta;
-                alternativasA[k] = await quiz[vetor[k]].respostas[0]["1"];
-                alternativasB[k] = await quiz[vetor[k]].respostas[0]["2"];
-                alternativasC[k] = await quiz[vetor[k]].respostas[0]["3"];
-                alternativasD[k] = await quiz[vetor[k]].respostas[0]["4"];
-                k++;
+        if(response.ok){
+        while(questoes<10){
+                vetorPerguntas[questoes] = quiz[vetor[questoes]].pergunta;
+                alternativasA[questoes] = quiz[vetor[questoes]].respostas[0]["1"];
+                alternativasB[questoes] = quiz[vetor[questoes]].respostas[0]["2"];
+                alternativasC[questoes] = quiz[vetor[questoes]].respostas[0]["3"];
+                alternativasD[questoes] = quiz[vetor[questoes]].respostas[0]["4"];
+                questoes++;
             }
+        } else{
+        questoes=0;
+        obterPergunta();
         }
+        questoes=0;
 }
 
+
+
 async function PLAY(){
+    ApagarTela();
 
-        ApagarTela();
-
+    questoes= parseInt(localStorage.getItem('Questoes'));
+    console.log(questoes)
         divCarregando = document.createElement('div');
             divCarregando.setAttribute('class', 'carregando');
                 container.appendChild(divCarregando);
                     Carregado = document.createElement('div');
                         Carregado.setAttribute('class', 'carregado');
-                            porcentagemCarregado+=9.8;
-                        Carregado.style.width = `${porcentagemCarregado}%`;
                     divCarregando.appendChild(Carregado);
+           porcentagemCarregado=`${(questoes+1)*9.8}`
+            divCarregando.appendChild(Carregado);
+
+        Carregado.style.width = `${porcentagemCarregado}%`;
 
                 divPerguntas = document.createElement('div');
             divPerguntas.setAttribute('class', 'divPerguntas');
@@ -259,7 +292,7 @@ async function PLAY(){
 
         var numeroQuestao = document.createElement('h1');
             numeroQuestao.setAttribute('class', 'texto');
-                numeroQuestao.style.fontSize = '20px';
+                numeroQuestao.style.fontSize = '15px';
                     numeroQuestao.innerHTML = `Pergunta ${questoes+1}/10`;
                         divPerguntas.appendChild(numeroQuestao);
 
@@ -267,63 +300,89 @@ async function PLAY(){
                         PerguntaText.setAttribute('class', 'texto');
                     PerguntaText.style.fontSize = '20px';
                 PerguntaText.style.marginBlock = '50px';
-                PerguntaText.innerHTML = `${vetorPerguntas[j]}`;
+                PerguntaText.innerHTML = `${vetorPerguntas[questoes]}`;
                 PerguntaText.style.maxWidth= '320px';
                 divPerguntas.appendChild(PerguntaText);
 
 ////////////////////// ALTERNATIVAS
         var btn1 = document.createElement('div');
-            btn1.innerHTML = `${alternativasA[j]}`;
+            btn1.innerHTML = `${alternativasA[questoes]}`;
                 btn1.setAttribute('class', 'botaoComeçar');
-                    btn1.style.margin='5px';
+                    btn1.style.margin='2px';
+                    btn1.style.width='360px';
                     btn1.style.fontSize='13px';
                         divPerguntas.appendChild(btn1);
 
                     var btn2 = document.createElement('div');
-                btn2.innerHTML = `${alternativasB[j]}`;
+                btn2.innerHTML = `${alternativasB[questoes]}`;
             btn2.setAttribute('class', 'botaoComeçar');
-        btn2.style.margin='5px';
+        btn2.style.margin='2px';
+        btn2.style.width='350px';
         btn2.style.fontSize='13px';
         divPerguntas.appendChild(btn2);
 
         var btn3 = document.createElement('div');
-            btn3.innerHTML = `${alternativasC[j]}`;
+            btn3.innerHTML = `${alternativasC[questoes]}`;
                 btn3.setAttribute('class', 'botaoComeçar');
-            btn3.style.margin='5px';
+            btn3.style.margin='2px';
+            btn3.style.width='350px';
             btn3.style.fontSize='13px';
         divPerguntas.appendChild(btn3);
 
         var btn4 = document.createElement('div');
-            btn4.innerHTML = `${alternativasD[j]}`;
+            btn4.innerHTML = `${alternativasD[questoes]}`;
                 btn4.setAttribute('class', 'botaoComeçar');
-            btn4.style.margin='5px';
+            btn4.style.margin='2px';
+            btn4.style.width='390px';
             btn4.style.fontSize='13px';
         divPerguntas.appendChild(btn4);
 ////////////////////// ALTERNATIVAS
+
+        divBotoes = document.createElement('div');
+        divBotoes.setAttribute('class', 'divPerguntas');
+        divBotoes.style.width="100%";
+        divBotoes.style.justifyContent='space-around';
+        divBotoes.style.background='none';
+        divBotoes.style.margin='20px';
+        divBotoes.style.flexDirection='row';
+        container.appendChild(divBotoes);
+
+        botaoAnterior = document.createElement('div');
+        botaoAnterior.innerHTML = `Voltar`;
+        botaoAnterior.style.width='45%';
+        botaoAnterior.setAttribute('class', 'botaoComeçar');
+            divBotoes.appendChild(botaoAnterior);
+
         botaoProxima = document.createElement('div');
             botaoProxima.innerHTML = `Próximo`;
+            botaoProxima.style.width='45%';
                 botaoProxima.setAttribute('class', 'botaoComeçar');
-            botaoProxima.style.margin='40px';
-        container.appendChild(botaoProxima);
-
+            divBotoes.appendChild(botaoProxima);
     botaoProxima.addEventListener('click', function(){
         if(questoes<9){
             questoes++;
-            j++;
+            RegistraQuestoesRespondidas(questoes);
                 PLAY();
         } else{
             BemVindo();
         }
     })
+
+    botaoAnterior.addEventListener('click', function(){
+        if(questoes>0){
+            questoes--;
+            RegistraQuestoesRespondidas(questoes);
+                PLAY();
+        }})
 }
 
 function renderizarFoto(){
     const img = document.createElement('img');
+    img.setAttribute('class', 'imgprofile');
         img.setAttribute('src', `${localStorage.getItem('fotoUser')}`);
     if(!localStorage.getItem('fotoUser')){
         img.setAttribute('src', 'profile-circle.png');
     }
-    img.setAttribute('class', 'imgprofile');
 
     divFoto.appendChild(img);
         return img;
@@ -341,7 +400,6 @@ async function main(){
     let botaoStart = TelaComeçar();
         GerarQuestoesAleatorias();
             botaoStart.addEventListener('click', function(){
-                obterPergunta();
                 settingsbtn.style.top="0";
                 if(!RegistrarUsuario()){
                     Register();}
@@ -354,29 +412,42 @@ async function main(){
 var naoclicavel = document.querySelector('.areanoclick');
 
 settingsbtn.addEventListener('click', function(){
+    ChamaMenu();
+})
+
+function ChamaMenu(){
     if(settingsclick==false){
-        naoclicavel.style.width='100%';
+        naoclicavel.style.width='100vw';
         naoclicavel.style.height='100%';
 
         menu = document.createElement('div');
         menu.setAttribute('class', 'divFoto');
-        menu.style.background='#7B7787';
+        menu.style.background='#262626';
         menu.style.boxShadow='0px 0px 90px black';
         menu.style.position = "absolute";
         naoclicavel.appendChild(menu);
 
-        botaoStart = document.createElement('div');
-            botaoStart.innerHTML = `Mudo`;
-                botaoStart.setAttribute('class', 'botaoComeçar');
-                    menu.appendChild(botaoStart);
+        const titulo = document.createElement('h1');
+        contTexto.setAttribute('class', 'contTexto');
+            titulo.setAttribute('class', 'texto');
+                titulo.innerHTML = `Configurações`;
+                    menu.appendChild(titulo);
 
-                    botaoStart = document.createElement('div');
-                botaoStart.innerHTML = `Mudar Tema`;
-            botaoStart.setAttribute('class', 'botaoComeçar');
-        menu.appendChild(botaoStart);
+        botaoMudarTema = document.createElement('div');
+        botaoMudarTema.innerHTML = `Mudar Tema`;
+        botaoMudarTema.style.background='#474747';
+                botaoMudarTema.setAttribute('class', 'botaoComeçar');
+                    menu.appendChild(botaoMudarTema);
+
+                    botaoMudarNome = document.createElement('div');
+                    botaoMudarNome.innerHTML = `Trocar nickname`;
+                    botaoMudarNome.style.background='#474747';
+                    botaoMudarNome.setAttribute('class', 'botaoComeçar');
+        menu.appendChild(botaoMudarNome);
 
         botaoSair = document.createElement('div');
             botaoSair.innerHTML = `Deslogar da conta`;
+            botaoSair.style.background='#474747';
                 botaoSair.setAttribute('class', 'botaoComeçar');
                     menu.appendChild(botaoSair);
 
@@ -389,6 +460,13 @@ settingsbtn.addEventListener('click', function(){
                         settingsclick = false;
                         location.reload();
                     })
+                    botaoMudarNome.addEventListener('click', function(){
+                        Register();
+                        naoclicavel.removeChild(menu);
+                        naoclicavel.style.width='0%';
+                        naoclicavel.style.height='0%';
+                        settingsclick = false;
+                    })
 
         settingsclick = true;
     } else{
@@ -398,4 +476,4 @@ settingsbtn.addEventListener('click', function(){
         naoclicavel.style.height='0%';
         settingsclick = false;
     }
-})
+}
