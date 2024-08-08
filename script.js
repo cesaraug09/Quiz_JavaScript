@@ -36,12 +36,6 @@ localStorage.setItem('lvlUser', '0');
 localStorage.setItem('diasCont', '0');
 localStorage.setItem('porcAcertos', '0');
 
-if(!localStorage.getItem('PrimeiroDiaJogado')){
-    localStorage.setItem('PrimeiroDiaJogado', diaHoje);
-    localStorage.setItem('DiasJogados', diaHoje);
-    vetorContadordeDias.push(diaHoje)
-}
-
 function RegistraDiasJogados(){
     vetorContadordeDias = parseInt(localStorage.getItem('DiasJogados'));
     if(!vetorContadordeDias.includes(diaHoje)){
@@ -51,6 +45,7 @@ function RegistraDiasJogados(){
 
 function RegistraQuestoesRespondidas(num){
     localStorage.setItem('Questoes',  num);
+    console.log(localStorage.getItem('Questoes'))
 }
 
 function localStorageNomeUsuario(){
@@ -74,6 +69,27 @@ function LimpaLocalStorage(){
     location.reload();
 }
 
+function PlacarEstatisticas(){
+    nomeUsuario = ImprimeTexto(`${localStorage.getItem('nomeGuardado')}`, 'texto', divFoto,  CorTextoSecundario);
+    nomeUsuario.style.marginTop='-120px';
+
+    divEstats = Imprime('div', null, 'divStatus', container, CorTextoSecundario, CorDivPrincipal);
+
+    ImprimeTexto(`Acertos:<br><br>${localStorage.getItem('lvlUser')}` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+
+    var divEstatsplus = document.createElement('div');
+    divEstatsplus.setAttribute('class', 'divStatusplus');
+    divEstats.appendChild(divEstatsplus);
+
+    ImprimeTexto(`SEQUÊNCIA:<br><br>${localStorage.getItem('diasCont')}` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+
+    var divEstatsplus1 = document.createElement('div');
+    divEstatsplus1.setAttribute('class', 'divStatusplus');
+    divEstats.appendChild(divEstatsplus1);
+
+    ImprimeTexto(`Acertos:<br><br>${localStorage.getItem('porcAcertos')}%` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+}
+
 ////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
 
 function obterNumeroAleatorio(min, max) {
@@ -86,7 +102,6 @@ function GerarQuestoesAleatorias() {
         if (!vetor.includes(RandomID)) {
             vetor[questoes] = RandomID;
             questoes++;
-            console.log(vetor);
         }
     }
     questoes=0;
@@ -122,6 +137,7 @@ function ImprimeTexto(texto,classe,ElementoPai, corText){
     titulo.innerHTML = texto;
     titulo.style.color=corText;
     ElementoPai.appendChild(titulo);
+    return titulo;
 }
 
 function renderizarFoto(){
@@ -209,7 +225,7 @@ function AdicionarFoto(){
     container.style.justifyContent= 'center';
     ApagarTela();
 
-    ImprimeTexto(`Olá, ${localStorage.getItem("nomeGuardado")}!<br>Por favor, escolha sua foto.`, 'texto', container, CorTextoPrincipal);
+    ImprimeTexto(`Olá, ${localStorage.getItem('nomeGuardado')}!<br>Por favor, escolha sua foto.`, 'texto', container, CorTextoPrincipal);
 
     divFoto = Imprime('div',null, 'divFoto', container, null, CorDivPrincipal);
     divFoto.style.margin='20px';
@@ -225,82 +241,32 @@ function AdicionarFoto(){
     })
 }
 
-
 function BemVindo(){
+    container.style.justifyContent= 'center';
     ApagarTela();
 
-    const titulo = document.createElement('h1');
-        contTexto.setAttribute('class', 'contTexto');
-            titulo.setAttribute('class', 'texto');
-        titulo.innerHTML = `Bem vindo.`;
-    container.appendChild(titulo);
+    ImprimeTexto(`Bem vindo.`, 'texto', container, '');
 
-    container.style.justifyContent= 'center';
-        divFoto = document.createElement('div');
-            divFoto.setAttribute('class', 'divFoto');
-                divFoto.style.height= '300px';
-                    divFoto.style.width= '360px';
-                divFoto.style.margin='80px';
-            divFoto.style.background= '#ffffff71';
-        container.appendChild(divFoto);
+    divFoto = Imprime('div',null, 'divFoto', container, CorTextoPrincipal, CorDivPrincipal);
+    divFoto.style.height= '300px';
+    divFoto.style.width= '360px';
+    divFoto.style.margin='80px';
 
     var img = renderizarFoto();
     img.style.marginTop='-200px';
+    PlacarEstatisticas();
+    botaoComeçaraJogar = Imprime('div', `PLAY QUIZ`, `botaoComeçar`, container, CorTextoPrincipal, CorBotaoSecundario);
 
-    const nomeUsuario = document.createElement('h1');
-        nomeUsuario.setAttribute('class', 'contTexto');
-            nomeUsuario.setAttribute('class', 'texto');
-                nomeUsuario.innerHTML = `${localStorage.getItem("nomeGuardado")}`;
-            nomeUsuario.style.color='#3e2a86';
-        nomeUsuario.style.marginTop='-120px';
-    divFoto.appendChild(nomeUsuario);
-
-    divEstats = document.createElement('div');
-        divEstats.setAttribute('class', 'divStatus');
-    container.appendChild(divEstats);
-
-    var nivel = document.createElement('h1');
-        nivel.setAttribute('class', 'textoSTATUS');
-            nivel.innerHTML = `Lvl:<br><br>${localStorage.getItem('lvlUser')}`;
-        divEstats.appendChild(nivel);
-
-    var divEstatsplus = document.createElement('div');
-        divEstatsplus.setAttribute('class', 'divStatusplus');
-    divEstats.appendChild(divEstatsplus);
-
-    var nivel = document.createElement('h1');
-        nivel.setAttribute('class', 'textoSTATUS');
-            nivel.innerHTML = `SEQUÊNCIA:<br><br>${localStorage.getItem('diasCont')}`;
-        divEstats.appendChild(nivel);
-
-    var divEstatsplus1 = document.createElement('div');
-        divEstatsplus1.setAttribute('class', 'divStatusplus');
-    divEstats.appendChild(divEstatsplus1);
-
-    var nivel = document.createElement('h1');
-        nivel.setAttribute('class', 'textoSTATUS');
-            nivel.innerHTML = `Acertos:<br><br>${localStorage.getItem('porcAcertos')}%`;
-        divEstats.appendChild(nivel);
-
-
-
-    botaoStart = document.createElement('div');
-        botaoStart.innerHTML = `PLAY QUIZ`;
-            botaoStart.setAttribute('class', 'botaoComeçar');
-        botaoStart.style.background = 'linear-gradient(to left, green, #29c029)';
-    container.appendChild(botaoStart);
-
-
+    botaoComeçaraJogar.addEventListener('click', function(){
+        ChecarRespostaMaxima();
+        PLAY();
+    })
     img.addEventListener('click', function(){
         AdicionarFoto();
     })
 
-
-    botaoStart.addEventListener('click', function(){
-        PLAY();
-    })
-
 }
+
 
 async function obterPergunta(){
         quiz = await fetchQuizData("quiz.json");
@@ -325,11 +291,16 @@ async function fetchQuizData(url) {
 
 
 
+function ChecarRespostaMaxima(){
+    let MaiorRespondida = parseInt(localStorage.getItem('Questoes'));
+    if(MaiorRespondida>=questoes){
+        questoes = MaiorRespondida;
+    }
+}
 async function PLAY(){
     ApagarTela();
-    recuperarNumeroQuestao =localStorage.getItem('Questoes');
-    questoes= parseInt(recuperarNumeroQuestao);
-    console.log(questoes)
+
+
         divCarregando = document.createElement('div');
             divCarregando.setAttribute('class', 'carregando');
                 container.appendChild(divCarregando);
@@ -417,16 +388,14 @@ async function PLAY(){
         if(questoes<9){
             questoes++;
             RegistraQuestoesRespondidas(questoes);
-                PLAY();
+            PLAY();
         } else{
             BemVindo();
         }
     })
-
     botaoAnterior.addEventListener('click', function(){
         if(questoes>0){
             questoes--;
-            RegistraQuestoesRespondidas(questoes);
                 PLAY();
         }})
 }
