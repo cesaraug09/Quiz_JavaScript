@@ -1,19 +1,16 @@
-let min = 1; let max = 40;
+let minJSON = 1; let maxJSON = 40;
 let questoes = 0;
-let pergunta;
 let vetor = [];
 let vetorPerguntas = [];
-let alternativasA=[];
-let alternativasB=[];
-let alternativasC=[];
-let alternativasD=[];
-const container = document.querySelector('.container');
+let alternativa1=[];
+let alternativa2=[];
+let alternativa3=[];
+let alternativa4=[];
 var linkFotoUser;
-let porcentagemCarregado = 0;
+const container = document.querySelector('.container');
 let settingsbtn = document.querySelector('.icoconfig img');
-settingsbtn.style.top="-100px"
-
 let settingsarea = document.querySelector('.areanoclick');
+
 let settingsclick = false;
 let vetorContadordeDias = [];
 
@@ -90,17 +87,24 @@ function PlacarEstatisticas(){
     ImprimeTexto(`Acertos:<br><br>${localStorage.getItem('porcAcertos')}%` , 'textoSTATUS' , divEstats, CorTextoSecundario);
 }
 
+function ChecarRespostaMaxima(){
+    let MaiorRespondida = parseInt(localStorage.getItem('Questoes'));
+    if(MaiorRespondida>=questoes){
+        questoes = MaiorRespondida;
+    }
+}
+
 ////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
 
-function obterNumeroAleatorio(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function obterNumeroAleatorio(minJSON, maxJSON) {
+    return Math.floor(Math.random() * (maxJSON - minJSON + 1)) + minJSON;
 }
 
 function GerarQuestoesAleatorias() {
     while (questoes < 10){
-        let RandomID = obterNumeroAleatorio(min, max);
-        if (!vetor.includes(RandomID)) {
-            vetor[questoes] = RandomID;
+        let randomID = obterNumeroAleatorio(minJSON, maxJSON);
+        if (!vetor.includes(randomID)) {
+            vetor[questoes] = randomID;
             questoes++;
         }
     }
@@ -147,7 +151,6 @@ function renderizarFoto(){
     if(!localStorage.getItem('fotoUser')){
         img.setAttribute('src', 'profile-circle.png');
     }
-
     divFoto.appendChild(img);
         return img;
 }
@@ -158,9 +161,7 @@ function EnviaEMudaFoto(img){
     inputFoto.setAttribute('class', 'inputfoto');
     inputFoto.style.display = 'none';
     container.appendChild(inputFoto);
-
     inputFoto.click();
-
     inputFoto.addEventListener('change', function(event) {
         const arquivoFOTO = event.target.files[0];
         if (arquivoFOTO) {
@@ -190,10 +191,7 @@ function GeraInputTexto(){
 
 function TelaComeçar(){
     ImprimeIMG('js.png', 'logo', container);
-    obterPergunta();
-
     var btnComeçar = Imprime('div','>> COMEÇAR <<', 'botaoComeçar', container, CorTextoPrincipal, CorBotaoPrincipal);
-
     btnComeçar.addEventListener('click', function(){
         settingsbtn.style.top="0"; ///// Faz o botao Settings Aparecer
         ChecaTemRegistro();
@@ -203,7 +201,6 @@ function TelaComeçar(){
 const inputNome = document.createElement('input');
 const contTexto = document.createElement('div');
 const botaoOk = document.createElement('div');
-
 
 function Register(){
     container.style.justifyContent= 'center';
@@ -222,14 +219,11 @@ function Register(){
 }
 
 function AdicionarFoto(){
-    container.style.justifyContent= 'center';
     ApagarTela();
-
+    container.style.justifyContent= 'center';
     ImprimeTexto(`Olá, ${localStorage.getItem('nomeGuardado')}!<br>Por favor, escolha sua foto.`, 'texto', container, CorTextoPrincipal);
-
     divFoto = Imprime('div',null, 'divFoto', container, null, CorDivPrincipal);
     divFoto.style.margin='20px';
-
     var img = renderizarFoto();
     botaoEnviar = Imprime('div',`ENVIAR FOTO`, 'botaoComeçar', divFoto, CorTextoPrincipal, CorBotaoSecundario);
     botaoEnviar.addEventListener('click', function(){
@@ -244,14 +238,11 @@ function AdicionarFoto(){
 function BemVindo(){
     container.style.justifyContent= 'center';
     ApagarTela();
-
     ImprimeTexto(`Bem vindo.`, 'texto', container, '');
-
     divFoto = Imprime('div',null, 'divFoto', container, CorTextoPrincipal, CorDivPrincipal);
     divFoto.style.height= '300px';
     divFoto.style.width= '360px';
     divFoto.style.margin='80px';
-
     var img = renderizarFoto();
     img.style.marginTop='-200px';
     PlacarEstatisticas();
@@ -268,138 +259,127 @@ function BemVindo(){
 }
 
 
-async function obterPergunta(){
-        quiz = await fetchQuizData("quiz.json");
-        while(questoes<10){
-                vetorPerguntas[questoes] = quiz[vetor[questoes]].pergunta;
-                alternativasA[questoes] = quiz[vetor[questoes]].respostas[0]["1"];
-                alternativasB[questoes] = quiz[vetor[questoes]].respostas[0]["2"];
-                alternativasC[questoes] = quiz[vetor[questoes]].respostas[0]["3"];
-                alternativasD[questoes] = quiz[vetor[questoes]].respostas[0]["4"];
-                questoes++;
-                    }
-        questoes=0;
+async function obterPerguntaJSON(){
+    try {
+        const quiz = await fetchQuizData("quiz.json");
+
+        for (let questoes = 0; questoes < 10; questoes++) {
+            vetorPerguntas[questoes] = quiz[vetor[questoes]].pergunta;
+            alternativa1[questoes] = quiz[vetor[questoes]].respostas[0]["1"];
+            alternativa2[questoes] = quiz[vetor[questoes]].respostas[0]["2"];
+            alternativa3[questoes] = quiz[vetor[questoes]].respostas[0]["3"];
+            alternativa4[questoes] = quiz[vetor[questoes]].respostas[0]["4"];
+        }
+    } catch (error) {
+        console.log('Erro no JSON');
+    }
 }
 
 async function fetchQuizData(url) {
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return await response.json();
-}
-
-
-
-function ChecarRespostaMaxima(){
-    let MaiorRespondida = parseInt(localStorage.getItem('Questoes'));
-    if(MaiorRespondida>=questoes){
-        questoes = MaiorRespondida;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+    } catch (error) {
+        console.log('Erro no fetch JSON');
     }
 }
+
+
+function StyleTBNAlternativas(btn){
+    btn.style.margin='2px';
+    btn.style.width='360px';
+    btn.style.fontSize='13px';
+}
+
+function GeraAlternativas(num, q){
+    num = Imprime('div', `${q[questoes]}`, 'botaoComeçar', divPerguntas, CorTextoPrincipal, CorBotaoPrincipal);
+    StyleTBNAlternativas(num)
+    return num;
+}
+
+function EscolhaAlternativa(){
+    btn1 = GeraAlternativas(1, alternativa1);
+    btn2 = GeraAlternativas(2, alternativa2);
+    btn3 = GeraAlternativas(3, alternativa3);
+    btn4 = GeraAlternativas(4, alternativa4);
+
+    btn1.addEventListener('click', function(){
+        alert('clicou no 1');
+    })
+    btn2.addEventListener('click', function(){
+        alert('clicou no 2');
+    })
+    btn3.addEventListener('click', function(){
+        alert('clicou no 3');
+    })
+    btn4.addEventListener('click', function(){
+        alert('clicou no 4');
+    })
+}
+
 async function PLAY(){
     ApagarTela();
 
+    BarraLoad = Imprime('div', null, 'carregando', container, null, null);
+    BarraLoad.style.height = '20px';
+    BarraFull = Imprime('div', null, 'carregado', BarraLoad, null, CorBotaoSecundario);
 
-        divCarregando = document.createElement('div');
-            divCarregando.setAttribute('class', 'carregando');
-                container.appendChild(divCarregando);
-                    Carregado = document.createElement('div');
-                        Carregado.setAttribute('class', 'carregado');
-                    divCarregando.appendChild(Carregado);
-           porcentagemCarregado=`${(questoes+1)*9.8}`
-            divCarregando.appendChild(Carregado);
+    BarraFull.style.width = `${(questoes+1)*9.8}%`;
 
-        Carregado.style.width = `${porcentagemCarregado}%`;
+    divPerguntas = Imprime('div', null, 'divPerguntas', container,null,CorDivSecundaria);
 
-                divPerguntas = document.createElement('div');
-            divPerguntas.setAttribute('class', 'divPerguntas');
-        container.appendChild(divPerguntas);
+    numeroQuestao = Imprime('h1', `Pergunta ${questoes+1}/10`, 'texto', divPerguntas, CorTextoPrincipal,null);
+    numeroQuestao.style.fontSize = '15px';
 
-        var numeroQuestao = document.createElement('h1');
-            numeroQuestao.setAttribute('class', 'texto');
-                numeroQuestao.style.fontSize = '15px';
-                    numeroQuestao.innerHTML = `Pergunta ${questoes+1}/10`;
-                        divPerguntas.appendChild(numeroQuestao);
+    PerguntaText = Imprime('h1', `${vetorPerguntas[questoes]}`, 'texto', divPerguntas, CorTextoPrincipal,null);
+    PerguntaText.style.fontSize = '20px';
+    PerguntaText.style.marginBlock = '50px';
+    PerguntaText.style.maxWidth= '320px';
 
-                            var PerguntaText = document.createElement('h1');
-                        PerguntaText.setAttribute('class', 'texto');
-                    PerguntaText.style.fontSize = '20px';
-                PerguntaText.style.marginBlock = '50px';
-                PerguntaText.innerHTML = `${vetorPerguntas[questoes]}`;
-                PerguntaText.style.maxWidth= '320px';
-                divPerguntas.appendChild(PerguntaText);
+    EscolhaAlternativa();
 
-////////////////////// ALTERNATIVAS
-        var btn1 = document.createElement('div');
-            btn1.innerHTML = `${alternativasA[questoes]}`;
-                btn1.setAttribute('class', 'botaoComeçar');
-                    btn1.style.margin='2px';
-                    btn1.style.width='360px';
-                    btn1.style.fontSize='13px';
-                        divPerguntas.appendChild(btn1);
+    BotoesProxx();
+}
 
-                    var btn2 = document.createElement('div');
-                btn2.innerHTML = `${alternativasB[questoes]}`;
-            btn2.setAttribute('class', 'botaoComeçar');
-        btn2.style.margin='2px';
-        btn2.style.width='350px';
-        btn2.style.fontSize='13px';
-        divPerguntas.appendChild(btn2);
+function DivdosBotoes(){
+    divBotoes = Imprime('div', null, 'divPerguntas',container, null, null);
+    divBotoes.style.width="100%";
+    divBotoes.style.justifyContent='space-around';
+    divBotoes.style.background='none';
+    divBotoes.style.margin='20px';
+    divBotoes.style.flexDirection='row';
+    return divBotoes;
+}
 
-        var btn3 = document.createElement('div');
-            btn3.innerHTML = `${alternativasC[questoes]}`;
-                btn3.setAttribute('class', 'botaoComeçar');
-            btn3.style.margin='2px';
-            btn3.style.width='350px';
-            btn3.style.fontSize='13px';
-        divPerguntas.appendChild(btn3);
+function BotoesProxx(){
+    DivBotoes = DivdosBotoes();
 
-        var btn4 = document.createElement('div');
-            btn4.innerHTML = `${alternativasD[questoes]}`;
-                btn4.setAttribute('class', 'botaoComeçar');
-            btn4.style.margin='2px';
-            btn4.style.width='390px';
-            btn4.style.fontSize='13px';
-        divPerguntas.appendChild(btn4);
-////////////////////// ALTERNATIVAS
+    Anterior = Imprime('div', 'Voltar', 'botaoComeçar', divBotoes, CorTextoPrincipal, CorBotaoPrincipal);
+    Anterior.style.width='45%';
 
-        divBotoes = document.createElement('div');
-        divBotoes.setAttribute('class', 'divPerguntas');
-        divBotoes.style.width="100%";
-        divBotoes.style.justifyContent='space-around';
-        divBotoes.style.background='none';
-        divBotoes.style.margin='20px';
-        divBotoes.style.flexDirection='row';
-        container.appendChild(divBotoes);
+    Proximo = Imprime('div', 'Próximo', 'botaoComeçar', divBotoes, CorTextoPrincipal, CorBotaoPrincipal);
+    Proximo.style.width='45%';
 
-        botaoAnterior = document.createElement('div');
-        botaoAnterior.innerHTML = `Voltar`;
-        botaoAnterior.style.width='45%';
-        botaoAnterior.setAttribute('class', 'botaoComeçar');
-            divBotoes.appendChild(botaoAnterior);
-
-        botaoProxima = document.createElement('div');
-            botaoProxima.innerHTML = `Próximo`;
-            botaoProxima.style.width='45%';
-                botaoProxima.setAttribute('class', 'botaoComeçar');
-            divBotoes.appendChild(botaoProxima);
-    botaoProxima.addEventListener('click', function(){
+    Anterior.addEventListener('click', function(){
+        if(questoes>0){
+            questoes--;
+                PLAY();
+        }})
+    Proximo.addEventListener('click', function(){
         if(questoes<9){
             questoes++;
-            RegistraQuestoesRespondidas(questoes);
+            if(questoes>=parseInt(localStorage.getItem('Questoes'))){
+                RegistraQuestoesRespondidas(questoes);
+            }
             PLAY();
         } else{
             BemVindo();
         }
     })
-    botaoAnterior.addEventListener('click', function(){
-        if(questoes>0){
-            questoes--;
-                PLAY();
-        }})
 }
-
 
 function ApagarTela(){
     while (container.firstChild) {
@@ -445,6 +425,8 @@ function FechaMenu(){
 }
 
 async function main(){
+    let a = obterPerguntaJSON();
+    console.log(a)
     TelaComeçar();
     GerarQuestoesAleatorias();
 }
