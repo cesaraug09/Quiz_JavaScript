@@ -30,12 +30,12 @@ body{
     justify-content: flex-end;
 }
 
-.icoconfig img{
+.icoconfig i{
+    font-size: 50px;
     top: -100px;
     opacity: 100%;
     margin: 20px;
     position: absolute;
-    width: 50px;
     transition: 0.5s ease;
     }
 .areanoclick{
@@ -48,7 +48,7 @@ body{
     width: 0%;
     height: 0%;
 }
-.icoconfig img:hover{
+.icoconfig i:hover{
     cursor: pointer;
     filter: brightness(150%);
     transform: scale(1.1);
@@ -347,7 +347,7 @@ h1{
     .icoconfig{
         margin: 0px;
     }
-    .icoconfig img{
+    .icoconfig i{
         margin: 0;
         scale: 0.7;
     }

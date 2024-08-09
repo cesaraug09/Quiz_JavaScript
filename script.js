@@ -8,9 +8,8 @@ let alternativa3=[];
 let alternativa4=[];
 var linkFotoUser;
 const container = document.querySelector('.container');
-let settingsbtn = document.querySelector('.icoconfig img');
+let settingsbtn = document.querySelector('.icoconfig i');
 let settingsarea = document.querySelector('.areanoclick');
-let icone = document.getElementById('cog');
 let settingsclick = false;
 let vetorContadordeDias = [];
 let prosseguir = 'false';
@@ -40,16 +39,22 @@ localStorage.setItem('diasCont', '0');
 localStorage.setItem('porcAcertos', '0');
 
 function RegistraDiasJogados(){
-    vetorContadordeDias = parseInt(localStorage.getItem('DiasJogados'));
-    if(!vetorContadordeDias.includes(diaHoje)){
-        vetorContadordeDias.push(diaHoje);
-        console.log(vetorContadordeDias)
+    diaHoje = parseInt(diaHoje);
+    console.log(diaHoje)
+    console.log(localStorage.getItem('DiasJogados'))
+
+    localStorage.getItem('DiasJogados');
+
+    if(parseInt(localStorage.getItem('DiasJogados'))==diaHoje){
+        console.log('voce ja jogou hoje');
+    } else{
+        console.log("pode jogar")
+        localStorage.setItem('DiasJogados', null);
     }
 }
 
 function RegistraQuestoesRespondidas(questoes){
     localStorage.setItem('Questoes',  questoes);
-    console.log(localStorage.getItem('Questoes'))
 }
 
 function localStorageNomeUsuario(){
@@ -91,7 +96,7 @@ function PlacarEstatisticas(){
     divEstatsplus1.setAttribute('class', 'divStatusplus');
     divEstats.appendChild(divEstatsplus1);
 
-    ImprimeTexto(`Acertos:<br><br>${localStorage.getItem('porcAcertos')}%` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+    ImprimeTexto(`A/E:<br><br>${localStorage.getItem('porcAcertos')}%` , 'textoSTATUS' , divEstats, CorTextoSecundario);
 }
 
 function ChecarRespostaMaxima(){
@@ -143,10 +148,10 @@ function Imprime(tipo, texto, classe, ElementoPai, corText, corBackGround){
 function MudarTema(){
     if(localStorage.getItem('Tema')!='Dark'){
         Cores('linear-gradient(to left, rgb(23, 3, 36), rgb(9, 24, 46))', '#3A0E6F','linear-gradient(to right, rgb(27, 192, 27), rgb(38, 156, 38))', '#7B7787', '#6120AA', '#FFFFFF', '#3E2A86');
-        icone.src = 'cog-solid-44.png';
+        settingsbtn.style.color = '#C576E4';
     } else{
         Cores('#0E0E0E', '#4A4D54','#5662F4', '#313338', '#313338', '#F2F3F5', '#688DA4');
-        icone.src = 'cog-solid-22.png';
+        settingsbtn.style.color = CorBotaoSecundario;
     }
 
 }
@@ -218,7 +223,6 @@ function TelaComeçar(){
     ImprimeIMG('js.png', 'logo', container);
     var btnComeçar = Imprime('div','>> COMEÇAR <<', 'botaoComeçar', container, CorTextoPrincipal, CorBotaoPrincipal);
     btnComeçar.addEventListener('click', function(){
-        settingsbtn.style.top="0"; ///// Faz o botao Settings Aparecer
         ChecaTemRegistro();
     })
 }
@@ -261,6 +265,7 @@ function AdicionarFoto(){
 }
 
 function BemVindo(){
+    settingsbtn.style.top="0"; ///// Faz o botao Settings Aparecer
     container.style.justifyContent= 'center';
     ApagarTela();
     ImprimeTexto(`Bem vindo.`, 'texto', container, '');
@@ -358,7 +363,7 @@ async function PLAY(){
     ApagarTela();
 
     BarraLoad = Imprime('div', null, 'carregando', container, null, null);
-    BarraLoad.style.height = '20px';
+    BarraLoad.style.height = '12px';
     BarraFull = Imprime('div', null, 'carregado', BarraLoad, null, CorBotaoSecundario);
 
     BarraFull.style.width = `${(questoes+1)*9.8}%`;
@@ -420,6 +425,7 @@ function BotoesProxx(){
             }
             PLAY();
         } else if(questoes==9){
+            localStorage.setItem('DiasJogados', parseInt(diaHoje));
             BemVindo();
         }
     })
@@ -487,6 +493,7 @@ async function main(){
     obterPerguntaJSON();
     TelaComeçar();
     GerarQuestoesAleatorias();
+    RegistraDiasJogados();
 }
 
 
