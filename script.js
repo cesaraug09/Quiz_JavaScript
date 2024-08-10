@@ -15,6 +15,7 @@ let CorDivSecundaria;
 let CorTextoPrincipal;
 let CorTextoSecundario;
 var Pergunta; var A; var B; var C; var D; var Certa; var Explicação;
+var acertos =[];
 const naoclicavel = document.querySelector('.areanoclick');
 
 let agora = new Date();
@@ -50,6 +51,12 @@ function LimpaPerguntas(){
 
 function RegistraQuestoesRespondidas(questoes){
     localStorage.setItem('Questoes',  questoes);
+}
+function RegistraAcertos(resposta){
+    console.log(acertos)
+    acertos.push(resposta);
+    localStorage.setItem('Acertos', acertos);
+    console.log(localStorage.getItem('Acertos'))
 }
 
 function localStorageNomeUsuario(){
@@ -330,6 +337,21 @@ function EscolhaAlternativa(){
     btn2 = GeraAlternativas(2, B);
     btn3 = GeraAlternativas(3, C);
     btn4 = GeraAlternativas(4, D);
+    console.log(questoes)
+    console.log(localStorage.getItem('Questoes'))
+    if(questoes==parseInt(localStorage.getItem('Questoes')) && localStorage.getItem('Questoes')<9 || localStorage.getItem('Questoes')==null){
+        EscutarBotoes(btn1, btn2, btn3, btn4);
+    } else{
+        Retrospectiva();
+    }
+}
+
+function Retrospectiva(){
+    const buttons = [btn1, btn2, btn3, btn4];
+    buttons[Certa-1].style.background = '#249838';
+}
+
+function EscutarBotoes(btn1, btn2, btn3, btn4){
     btn1.addEventListener('click', function(){
         if(!clicou){
         VerdadeiraFalsa(1, btn1)}
@@ -354,9 +376,13 @@ function VerdadeiraFalsa(num, btnclicou){
     BtnProsseguir();
     if (num === Certa) {
         btnclicou.style.background = '#249838'; // Verde para a resposta correta
+        btnclicou.style.animation = 'acertou 1s ease'
+        RegistraAcertos(1)
     } else {
         btnclicou.style.background = '#AB3043';
         buttons[Certa-1].style.background = '#249838';
+        btnclicou.style.animation = 'errou 1s ease'
+        RegistraAcertos(0)
     }
 }
 
