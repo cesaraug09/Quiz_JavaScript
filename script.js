@@ -216,7 +216,7 @@ function ChecaTemRegistro(){
 
 
     function TelaComeçar(){
-        ImprimeIMG('js.png', 'logo', container);
+        ImprimeIMG('logo.png', 'logo', container);
         var btnComeçar = Imprime('div','>> COMEÇAR <<', 'botaoComeçar', container, CorTextoPrincipal, CorBotaoPrincipal);
         btnComeçar.addEventListener('click', function(){
             ChecaTemRegistro();
@@ -288,13 +288,13 @@ function BemVindo(){
 async function obterPerguntaJSON(){
     try {
         const quiz = await fetchQuizData("quiz.json");
-            Pergunta = quiz[vetor[questoes]].pergunta;
-            A = quiz[vetor[questoes]].respostas[0]["1"];
-            B = quiz[vetor[questoes]].respostas[0]["2"];
-            C = quiz[vetor[questoes]].respostas[0]["3"];
-            D = quiz[vetor[questoes]].respostas[0]["4"];
-            Certa = quiz[vetor[questoes]].verdadeira;
-            Explicação = quiz[vetor[questoes]].explicação;
+            Pergunta = quiz[vetor[questoes]-1].pergunta;
+            A = quiz[vetor[questoes]-1].respostas[0]["1"];
+            B = quiz[vetor[questoes]-1].respostas[0]["2"];
+            C = quiz[vetor[questoes]-1].respostas[0]["3"];
+            D = quiz[vetor[questoes]-1].respostas[0]["4"];
+            Certa = quiz[vetor[questoes]-1].verdadeira;
+            Explicação = quiz[vetor[questoes]-1].explicação;
     } catch (error) {
         console.log('Erro no JSON');
     }
