@@ -14,12 +14,13 @@ let CorDivPrincipal;
 let CorDivSecundaria;
 let CorTextoPrincipal;
 let CorTextoSecundario;
+var Marcados;
 var Pergunta; var A; var B; var C; var D; var Certa; var Explicação;
-var acertos =[];
+var terminou=false;
 const naoclicavel = document.querySelector('.areanoclick');
 
 let agora = new Date();
-let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
+let diaHoje = 20082024;
 
 main();
 
@@ -47,16 +48,27 @@ function RegistraDiasJogados(){
 }
 function LimpaPerguntas(){
     localStorage.removeItem('QuestoesAleatdoDia');
+    localStorage.removeItem('Questoes');
+    console.log(localStorage.getItem*'QuestoesAleatdoDia')
 }
 
 function RegistraQuestoesRespondidas(questoes){
     localStorage.setItem('Questoes',  questoes);
 }
-function RegistraAcertos(resposta){
-    console.log(acertos)
-    acertos.push(resposta);
-    localStorage.setItem('Acertos', acertos);
-    console.log(localStorage.getItem('Acertos'))
+function RegistraAltMarcadas(resposta){
+
+    if(localStorage.getItem('MarcadosPeloUsuario')!=null){
+        ResgataArrayMarcados()
+        Marcados.push(resposta)
+        localStorage.setItem('MarcadosPeloUsuario', Marcados);
+    } else{
+        localStorage.setItem('MarcadosPeloUsuario', resposta);
+    }
+}
+
+function ResgataArrayMarcados(){
+    var vetorMarcados = localStorage.getItem('MarcadosPeloUsuario')
+        Marcados = vetorMarcados.split(',').map(Number);
 }
 
 function localStorageNomeUsuario(){
@@ -337,9 +349,7 @@ function EscolhaAlternativa(){
     btn2 = GeraAlternativas(2, B);
     btn3 = GeraAlternativas(3, C);
     btn4 = GeraAlternativas(4, D);
-    console.log(questoes)
-    console.log(localStorage.getItem('Questoes'))
-    if(questoes==parseInt(localStorage.getItem('Questoes')) && localStorage.getItem('Questoes')<9 || localStorage.getItem('Questoes')==null){
+    if(questoes==parseInt(localStorage.getItem('Questoes')) && localStorage.getItem('Questoes')<= 9 && terminou==false|| localStorage.getItem('Questoes')==null){
         EscutarBotoes(btn1, btn2, btn3, btn4);
     } else{
         Retrospectiva();
@@ -349,6 +359,8 @@ function EscolhaAlternativa(){
 function Retrospectiva(){
     const buttons = [btn1, btn2, btn3, btn4];
     buttons[Certa-1].style.background = '#249838';
+    console.log(questoes) ////////// MARCADOS ESTA BUGADO, MARCANDO O ULTIMO INFITIN
+    console.log(Marcados[questoes])
 }
 
 function EscutarBotoes(btn1, btn2, btn3, btn4){
@@ -377,12 +389,12 @@ function VerdadeiraFalsa(num, btnclicou){
     if (num === Certa) {
         btnclicou.style.background = '#249838'; // Verde para a resposta correta
         btnclicou.style.animation = 'acertou 1s ease'
-        RegistraAcertos(1)
+        RegistraAltMarcadas(num)
     } else {
         btnclicou.style.background = '#AB3043';
         buttons[Certa-1].style.background = '#249838';
         btnclicou.style.animation = 'errou 1s ease'
-        RegistraAcertos(0)
+        RegistraAltMarcadas(num)
     }
 }
 
@@ -460,6 +472,7 @@ function BotoesProxx(){
             PLAY();
         } else if(questoes==9){
             BemVindo();
+            terminou=true;
         }
     })
 }
@@ -526,6 +539,7 @@ async function main(){
     TelaComeçar();
     RegistraDiasJogados();
     ChecarRespostaMaxima();
+    ResgataArrayMarcados()
 }
 
 
