@@ -16,9 +16,7 @@ let CorTextoPrincipal;
 let CorTextoSecundario;
 var Marcados;
 var Pergunta; var A; var B; var C; var D; var Certa; var Explicação;
-var terminou=false;
 const naoclicavel = document.querySelector('.areanoclick');
-
 let agora = new Date();
 let diaHoje = 20082024;
 
@@ -29,10 +27,6 @@ if(localStorage.getItem('Tema')!='Padrão' && localStorage.getItem('Tema')!='Dar
     localStorage.setItem('Tema','Padrão');
     MudarTema();
 }
-
-localStorage.setItem('lvlUser', '0');
-localStorage.setItem('diasCont', '0');
-localStorage.setItem('porcAcertos', '0');
 
 function RegistraDiasJogados(){
     diaHoje = parseInt(diaHoje);
@@ -49,14 +43,14 @@ function RegistraDiasJogados(){
 function LimpaPerguntas(){
     localStorage.removeItem('QuestoesAleatdoDia');
     localStorage.removeItem('Questoes');
-    console.log(localStorage.getItem*'QuestoesAleatdoDia')
+    localStorage.removeItem(`terminou`)
+    localStorage.removeItem('MarcadosPeloUsuario')
 }
 
 function RegistraQuestoesRespondidas(questoes){
     localStorage.setItem('Questoes',  questoes);
 }
 function RegistraAltMarcadas(resposta){
-
     if(localStorage.getItem('MarcadosPeloUsuario')!=null){
         ResgataArrayMarcados()
         Marcados.push(resposta)
@@ -116,6 +110,27 @@ function ChecaTemRegistro(){
         }
         localStorage.setItem('QuestoesAleatdoDia', vetor);
         questoes=0;
+    }
+
+    function RegistraAltMarcadas(resposta){
+        if(localStorage.getItem('MarcadosPeloUsuario')!=null){
+            ResgataArrayMarcados()
+            Marcados.push(resposta)
+            if(Marcados.length<=10){
+                localStorage.setItem('MarcadosPeloUsuario', Marcados);
+            }
+        } else{
+            localStorage.setItem('MarcadosPeloUsuario', resposta);
+        }
+    }
+
+    function ResgataArrayMarcados(){
+        var vetorMarcados = localStorage.getItem('MarcadosPeloUsuario')
+        if(localStorage.getItem('MarcadosPeloUsuario')!=null){
+            Marcados = vetorMarcados.split(',').map(Number);
+        } else{
+            Marcados =[];
+        }
     }
 
     ////////////////// PARTE PARA GERAR VETORES COM NUMEROS ALEATORIOS
@@ -349,7 +364,7 @@ function EscolhaAlternativa(){
     btn2 = GeraAlternativas(2, B);
     btn3 = GeraAlternativas(3, C);
     btn4 = GeraAlternativas(4, D);
-    if(questoes==parseInt(localStorage.getItem('Questoes')) && localStorage.getItem('Questoes')<= 9 && terminou==false|| localStorage.getItem('Questoes')==null){
+    if(questoes==parseInt(localStorage.getItem('Questoes')) && localStorage.getItem('Questoes')<= 9 && !localStorage.getItem('terminou')|| localStorage.getItem('Questoes')==null){
         EscutarBotoes(btn1, btn2, btn3, btn4);
     } else{
         Retrospectiva();
@@ -359,8 +374,9 @@ function EscolhaAlternativa(){
 function Retrospectiva(){
     const buttons = [btn1, btn2, btn3, btn4];
     buttons[Certa-1].style.background = '#249838';
-    console.log(questoes) ////////// MARCADOS ESTA BUGADO, MARCANDO O ULTIMO INFITIN
-    console.log(Marcados[questoes])
+    if(Certa-1 != Marcados[questoes]-1){
+        buttons[Marcados[questoes]-1].style.background = '#AB3043'
+    }
 }
 
 function EscutarBotoes(btn1, btn2, btn3, btn4){
@@ -383,6 +399,7 @@ function EscutarBotoes(btn1, btn2, btn3, btn4){
 }
 
 function VerdadeiraFalsa(num, btnclicou){
+    RegistraQuestoesRespondidas(questoes);
     const buttons = [btn1, btn2, btn3, btn4];
     clicou = true;
     BtnProsseguir();
@@ -459,7 +476,7 @@ function BotoesProxx(){
     }
 
     Anterior.addEventListener('click', function(){
-        if(questoes>0){
+        if(questoes>0 && clicou == false){
             questoes--;
                 PLAY();
         }})
@@ -470,9 +487,9 @@ function BotoesProxx(){
                 RegistraQuestoesRespondidas(questoes);
             }
             PLAY();
-        } else if(questoes==9){
+        } else if(questoes==9 && Marcados.length==10){
             BemVindo();
-            terminou=true;
+            localStorage.setItem(`terminou`, true)
         }
     })
 }
@@ -535,11 +552,11 @@ function FechaMenu(){
 }
 
 async function main(){
+    ResgataArrayMarcados()
     MudarTema();
     TelaComeçar();
     RegistraDiasJogados();
     ChecarRespostaMaxima();
-    ResgataArrayMarcados()
 }
 
 
