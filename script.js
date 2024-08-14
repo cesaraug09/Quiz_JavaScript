@@ -18,7 +18,7 @@ var Marcados;
 var Pergunta; var A; var B; var C; var D; var Certa; var Explicação;
 const naoclicavel = document.querySelector('.areanoclick');
 let agora = new Date();
-let diaHoje = 20082024;
+let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
 
 main();
 
@@ -29,12 +29,11 @@ if(localStorage.getItem('Tema')!='Padrão' && localStorage.getItem('Tema')!='Dar
 }
 
 function RegistraDiasJogados(){
-    diaHoje = parseInt(diaHoje);
 
     if(parseInt(localStorage.getItem('diaHoje'))==diaHoje){
         let vetorStrings = localStorage.getItem('QuestoesAleatdoDia')
         vetor = vetorStrings.split(',').map(Number);
-    } else if(localStorage.getItem('diaHoje')!=diaHoje){
+    } else if(parseInt(localStorage.getItem('diaHoje'))!=parseInt(diaHoje)){
         LimpaPerguntas();
         GerarQuestoesAleatorias();
         localStorage.setItem('diaHoje', diaHoje);
