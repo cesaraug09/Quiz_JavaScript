@@ -1,13 +1,3 @@
-let minJSON = 1; let maxJSON = 40;
-let questoes = 0;
-let vetor = [];
-var linkFotoUser;
-const container = document.querySelector('.container');
-let settingsbtn = document.querySelector('.icoconfig i');
-let settingsarea = document.querySelector('.areanoclick');
-let settingsclick = false;
-let vetorContadordeDias = [];
-let prosseguir = 'false';
 let CorBotaoPrincipal;
 let CorBotaoSecundario;
 let CorDivPrincipal;
@@ -16,52 +6,72 @@ let CorTextoPrincipal;
 let CorTextoSecundario;
 var Marcados;
 var Pergunta; var A; var B; var C; var D; var Certa; var Explicação;
+let minJSON = 1; let maxJSON = 40;
+let questoes = 0;
+let settingsclick = false;
+let prosseguir = 'false';
+let vetorContadordeDias = [];
+let vetor = [];
+const container = document.querySelector('.container');
+let settingsbtn = document.querySelector('.icoconfig i');
+let settingsarea = document.querySelector('.areanoclick');
 const naoclicavel = document.querySelector('.areanoclick');
-let agora = new Date();
-let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
 
-main();
+var acertos = parseInt(localStorage.getItem('qntAcertos'));
+var diasJogados = parseInt(localStorage.getItem('diasJogados'));
 
+////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
 
 if(localStorage.getItem('Tema')!='Padrão' && localStorage.getItem('Tema')!='Dark'){
     localStorage.setItem('Tema','Padrão');
     MudarTema();
 }
 
-function RegistraDiasJogados(){
+if(!localStorage.getItem('qntAcertos')){
+    localStorage.setItem('qntAcertos', 0);
+    acertos = parseInt(localStorage.getItem('qntAcertos'));
+    localStorage.setItem('qntAcertos', acertos);
+}
+
+function qntAcertos(){
+        localStorage.setItem('qntAcertos', acertos+=1);
+}
+
+function ChecaJogouHoje(){
+    let agora = new Date();
+    let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
 
     if(parseInt(localStorage.getItem('diaHoje'))==diaHoje){
         let vetorStrings = localStorage.getItem('QuestoesAleatdoDia')
         vetor = vetorStrings.split(',').map(Number);
     } else if(parseInt(localStorage.getItem('diaHoje'))!=parseInt(diaHoje)){
-        LimpaPerguntas();
+        LimpaCache();
         GerarQuestoesAleatorias();
         localStorage.setItem('diaHoje', diaHoje);
     }
 }
-function LimpaPerguntas(){
+
+function DiasJogados(){
+    if(localStorage.getItem('diasJogados')==null){
+        localStorage.setItem('diasJogados', 0);
+        diasJogados = parseInt(localStorage.getItem('diasJogados'));
+    } else{
+        localStorage.setItem('diasJogados', diasJogados)
+    }
+}
+
+function LimpaCache(){
     localStorage.removeItem('QuestoesAleatdoDia');
     localStorage.removeItem('Questoes');
     localStorage.removeItem(`terminou`)
     localStorage.removeItem('MarcadosPeloUsuario')
+    localStorage.removeItem('qntAcertos');
 }
 
 function RegistraQuestoesRespondidas(questoes){
+    if(questoes>localStorage.getItem('Questoes') && questoes<=9){
     localStorage.setItem('Questoes',  questoes);
 }
-function RegistraAltMarcadas(resposta){
-    if(localStorage.getItem('MarcadosPeloUsuario')!=null){
-        ResgataArrayMarcados()
-        Marcados.push(resposta)
-        localStorage.setItem('MarcadosPeloUsuario', Marcados);
-    } else{
-        localStorage.setItem('MarcadosPeloUsuario', resposta);
-    }
-}
-
-function ResgataArrayMarcados(){
-    var vetorMarcados = localStorage.getItem('MarcadosPeloUsuario')
-        Marcados = vetorMarcados.split(',').map(Number);
 }
 
 function localStorageNomeUsuario(){
@@ -76,7 +86,7 @@ function ChecaTemRegistro(){
         }
     }
 
-    function LimpaLocalStorage(){
+function LimpaLocalStorage(){
         localStorage.clear();
         naoclicavel.removeChild(menu);
         naoclicavel.style.width='0%';
@@ -86,20 +96,19 @@ function ChecaTemRegistro(){
     }
 
 
-    function ChecarRespostaMaxima(){
+function ChecarRespostaMaxima(){
         let MaiorRespondida = parseInt(localStorage.getItem('Questoes'));
         if(MaiorRespondida>=questoes){
             questoes = MaiorRespondida;
         }
     }
 
-    ////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
 
-    function obterNumeroAleatorio(minJSON, maxJSON) { /////// Uma vez por dia
+function obterNumeroAleatorio(minJSON, maxJSON) { /////// Uma vez por dia
         return Math.floor(Math.random() * (maxJSON - minJSON + 1)) + minJSON;
     }
 
-    function GerarQuestoesAleatorias(){ /////// Uma vez por dia
+function GerarQuestoesAleatorias(){ /////// Uma vez por dia
         while (questoes < 10){
             let randomID = obterNumeroAleatorio(minJSON, maxJSON);
             if (!vetor.includes(randomID)) {
@@ -111,7 +120,7 @@ function ChecaTemRegistro(){
         questoes=0;
     }
 
-    function RegistraAltMarcadas(resposta){
+function RegistraAltMarcadas(resposta){
         if(localStorage.getItem('MarcadosPeloUsuario')!=null){
             ResgataArrayMarcados()
             Marcados.push(resposta)
@@ -123,7 +132,7 @@ function ChecaTemRegistro(){
         }
     }
 
-    function ResgataArrayMarcados(){
+function ResgataArrayMarcados(){
         var vetorMarcados = localStorage.getItem('MarcadosPeloUsuario')
         if(localStorage.getItem('MarcadosPeloUsuario')!=null){
             Marcados = vetorMarcados.split(',').map(Number);
@@ -132,7 +141,7 @@ function ChecaTemRegistro(){
         }
     }
 
-    ////////////////// PARTE PARA GERAR VETORES COM NUMEROS ALEATORIOS
+////////////////// PARTE PARA GERAR VETORES COM NUMEROS ALEATORIOS
 
     function ImprimeIMG(src, classe, ElementoPai){
         const img = document.createElement('img');
@@ -159,8 +168,8 @@ function ChecaTemRegistro(){
             Cores('linear-gradient(to left, rgb(23, 3, 36), rgb(9, 24, 46))', '#3A0E6F','linear-gradient(to right, rgb(27, 192, 27), rgb(38, 156, 38))', '#7B7787', '#6120AA', '#FFFFFF', '#3E2A86');
             settingsbtn.style.color = '#C576E4';
         } else{
-            Cores('#0E0E0E', '#4A4D54','#5662F4', '#313338', '#313338', '#F2F3F5', '#688DA4');
-            settingsbtn.style.color = CorBotaoSecundario;
+            Cores('#0A0714', '#4A4D54','linear-gradient(to right, #C129EB, #9733DD)', '#313338', '#313338', '#F2F3F5', '#9F9F9F');
+            settingsbtn.style.color = '#C129EB';
         }
 
     }
@@ -206,7 +215,7 @@ function ChecaTemRegistro(){
             if (arquivoFOTO) {
                 const novaFoto = new FileReader();
                 novaFoto.onload = function(e) {
-                    linkFotoUser = e.target.result;
+                    var linkFotoUser = e.target.result;
                     localStorage.setItem('fotoUser', linkFotoUser);
                     img.setAttribute('src', `${linkFotoUser}`);
                     localStorage.setItem("fotoUser", `${linkFotoUser}`);
@@ -231,7 +240,7 @@ function ChecaTemRegistro(){
 
         divEstats = Imprime('div', null, 'divStatus', container, CorTextoSecundario, CorDivPrincipal);
 
-        ImprimeTexto(`Acertos:<br><br>${localStorage.getItem('lvlUser')}` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+        ImprimeTexto(`Acertou:<br><br>${localStorage.getItem('qntAcertos')}` , 'textoSTATUS' , divEstats, CorTextoSecundario);
 
         var divEstatsplus = document.createElement('div');
         divEstatsplus.setAttribute('class', 'divStatusplus');
@@ -371,10 +380,10 @@ function EscolhaAlternativa(){
 }
 
 function Retrospectiva(){
-    const buttons = [btn1, btn2, btn3, btn4];
-    buttons[Certa-1].style.background = '#249838';
-    if(Certa-1 != Marcados[questoes]-1){
-        buttons[Marcados[questoes]-1].style.background = '#AB3043'
+        const buttons = [btn1, btn2, btn3, btn4];
+        buttons[Certa-1].style.background = CorBotaoSecundario;
+        if(Certa-1 != Marcados[questoes]-1){
+            buttons[Marcados[questoes]-1].style.background = '#AB3043'
     }
 }
 
@@ -398,17 +407,18 @@ function EscutarBotoes(btn1, btn2, btn3, btn4){
 }
 
 function VerdadeiraFalsa(num, btnclicou){
-    RegistraQuestoesRespondidas(questoes);
+    RegistraQuestoesRespondidas(questoes+1);
     const buttons = [btn1, btn2, btn3, btn4];
     clicou = true;
     BtnProsseguir();
     if (num === Certa) {
-        btnclicou.style.background = '#249838'; // Verde para a resposta correta
+        btnclicou.style.background = CorBotaoSecundario; // Verde para a resposta correta
         btnclicou.style.animation = 'acertou 1s ease'
         RegistraAltMarcadas(num)
+        qntAcertos();
     } else {
         btnclicou.style.background = '#AB3043';
-        buttons[Certa-1].style.background = '#249838';
+        buttons[Certa-1].style.background = CorBotaoSecundario;
         btnclicou.style.animation = 'errou 1s ease'
         RegistraAltMarcadas(num)
     }
@@ -451,7 +461,7 @@ function DivdosBotoes(){
     divBotoes.style.width="100%";
     divBotoes.style.justifyContent='space-around';
     divBotoes.style.background='none';
-    divBotoes.style.margin='20px';
+    divBotoes.style.marginTop='20px';
     divBotoes.style.flexDirection='row';
     return divBotoes;
 }
@@ -478,13 +488,15 @@ function BotoesProxx(){
         if(questoes>0 && clicou == false){
             questoes--;
                 PLAY();
-        }})
+        }else if(questoes==0){
+            BemVindo();
+        }
+    })
+
     Proximo.addEventListener('click', function(){
         if(questoes<9 && prosseguir==true){
             questoes++;
-            if(questoes>localStorage.getItem('Questoes')){
-                RegistraQuestoesRespondidas(questoes);
-            }
+            RegistraQuestoesRespondidas(questoes);
             PLAY();
         } else if(questoes==9 && Marcados.length==10){
             BemVindo();
@@ -551,10 +563,10 @@ function FechaMenu(){
 }
 
 async function main(){
-    ResgataArrayMarcados()
+    ResgataArrayMarcados();
     MudarTema();
     TelaComeçar();
-    RegistraDiasJogados();
+    ChecaJogouHoje();
     ChecarRespostaMaxima();
 }
 
@@ -569,3 +581,5 @@ botaoOk.addEventListener('click', function(){
         AdicionarFoto(inputNome);
     }
 })
+
+main();
