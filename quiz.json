@@ -10,8 +10,7 @@
                 "4": "Document Object Model"
             }
         ],
-        "verdadeira": 4,
-        "explicação": "A sigla 'DOM' significa Document Object Model (Modelo de Objeto de Documento). É uma interface de programação que representa a estrutura de um documento HTML ou XML como uma árvore de objetos, permitindo a manipulação e alteração dinâmica do conteúdo e estrutura da página web com JavaScript. O DOM é essencial para criar páginas web interativas e dinâmicas."
+        "verdadeira": 4
     },
     {
         "id": 2,
@@ -24,8 +23,7 @@
                 "4": "Uma estrutura de dados para armazenar valores nulos."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'undefined' é um tipo de dado que indica que uma variável não foi inicializada. É o valor padrão atribuído a variáveis que são declaradas mas não têm um valor definido."
+        "verdadeira": 2
     },
     {
         "id": 3,
@@ -38,8 +36,7 @@
                 "4": "Verificar se dois valores são iguais e do mesmo tipo."
             }
         ],
-        "verdadeira": 4,
-        "explicação": "O operador '===' verifica se dois valores são iguais e do mesmo tipo, sem realizar conversão de tipo, diferentemente do operador '==' que realiza a conversão de tipo antes da comparação."
+        "verdadeira": 4
     },
     {
         "id": 4,
@@ -52,8 +49,7 @@
                 "4": "Analisa uma expressão matemática e retorna o resultado."
             }
         ],
-        "verdadeira": 3,
-        "explicação": "A função 'parseInt()' converte uma string em um número inteiro. Ela analisa a string fornecida e retorna o valor numérico correspondente, ignorando qualquer texto que não possa ser convertido."
+        "verdadeira": 3
     },
     {
         "id": 5,
@@ -66,8 +62,7 @@
                 "4": "'null' e 'undefined' são intercambiáveis e representam a mesma coisa."
             }
         ],
-        "verdadeira": 3,
-        "explicação": "'null' é um valor que você atribui explicitamente a uma variável para indicar ausência de valor. 'undefined' é o valor padrão atribuído a variáveis que foram declaradas, mas ainda não foram inicializadas."
+        "verdadeira": 3
     },
     {
         "id": 6,
@@ -80,8 +75,7 @@
                 "4": "Uma função que retorna um valor padrão."
             }
         ],
-        "verdadeira": 1,
-        "explicação": "Uma função anônima é uma função que não tem um nome definido e é frequentemente usada como um valor em expressões ou passada como argumento para outras funções."
+        "verdadeira": 1
     },
     {
         "id": 7,
@@ -94,8 +88,7 @@
                 "4": "'var' é obsoleto, 'let' e 'const' são usados para declarar constantes."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'var' tem escopo de função, enquanto 'let' e 'const' têm escopo de bloco. 'const' é utilizado para valores que não devem ser reatribuídos, enquanto 'let' e 'var' permitem reatribuição."
+        "verdadeira": 2
     },
     {
         "id": 8,
@@ -108,8 +101,7 @@
                 "4": "O comportamento em que declarações de variáveis e funções são movidas para o topo do seu escopo durante a execução."
             }
         ],
-        "verdadeira": 4,
-        "explicação": "'Hoisting' é o comportamento onde declarações de variáveis e funções são movidas para o topo de seu escopo durante a execução, permitindo que possam ser usadas antes de serem declaradas no código."
+        "verdadeira": 4
     },
     {
         "id": 9,
@@ -122,8 +114,7 @@
                 "4": "Usando o operador 'new' com uma função construtora."
             }
         ],
-        "verdadeira": 3,
-        "explicação": "Você pode criar um objeto em JavaScript usando a sintaxe de literal de objeto (por exemplo, `{}`) ou o construtor 'new Object()'."
+        "verdadeira": 3
     },
     {
         "id": 10,
@@ -136,8 +127,7 @@
                 "4": "Um objeto que representa a eventual conclusão (ou falha) de uma operação assíncrona."
             }
         ],
-        "verdadeira": 4,
-        "explicação": "Uma 'Promise' é um objeto que representa a eventual conclusão ou falha de uma operação assíncrona e seu resultado. Ele permite lidar com operações assíncronas de maneira mais gerenciável."
+        "verdadeira": 4
     },
     {
         "id": 11,
@@ -150,8 +140,7 @@
                 "4": "Modifica o array original, removendo elementos que não atendem a uma condição."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'Array.prototype.map()' cria um novo array com os resultados da aplicação de uma função a cada elemento do array original, sem modificar o array original."
+        "verdadeira": 2
     },
     {
         "id": 12,
@@ -164,8 +153,7 @@
                 "4": "Analisa uma expressão matemática e retorna o resultado."
             }
         ],
-        "verdadeira": 1,
-        "explicação": "O operador 'typeof' retorna uma string que indica o tipo do operando, permitindo identificar se uma variável é um número, string, objeto, etc."
+        "verdadeira": 1
     },
     {
         "id": 13,
@@ -178,8 +166,7 @@
                 "4": "Error"
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'5 + '5'' resulta em '55' porque o operador '+' é usado para concatenação de strings quando um dos operandos é uma string."
+        "verdadeira": 2
     },
     {
         "id": 14,
@@ -192,8 +179,7 @@
                 "4": "array.shift()"
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'array.push()' adiciona um ou mais itens ao final de um array e retorna o novo comprimento do array."
+        "verdadeira": 2
     },
     {
         "id": 15,
@@ -206,8 +192,7 @@
                 "4": "const nome;"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "Você pode declarar uma variável em JavaScript usando 'var', 'let' ou 'const'. 'var' é uma forma antiga de declaração que ainda é válida."
+        "verdadeira": 1
     },
     {
         "id": 16,
@@ -220,8 +205,7 @@
                 "4": "Substitui todas as ocorrências de um caractere em uma string."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'toUpperCase()' retorna uma nova string com todos os caracteres convertidos para maiúsculas."
+        "verdadeira": 2
     },
     {
         "id": 17,
@@ -234,8 +218,7 @@
                 "4": "'==' é usado para igualdade, enquanto '===' é usado para atribuição."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'==' realiza uma conversão de tipo antes de comparar os valores, enquanto '===' compara tanto o valor quanto o tipo sem conversão."
+        "verdadeira": 2
     },
     {
         "id": 18,
@@ -248,8 +231,7 @@
                 "4": "Ordena os elementos de um array em ordem crescente."
             }
         ],
-        "verdadeira": 1,
-        "explicação": "O método 'filter()' cria um novo array com todos os elementos que passam em um teste fornecido por uma função."
+        "verdadeira": 1
     },
     {
         "id": 19,
@@ -262,8 +244,7 @@
                 "4": "'# comentário'"
             }
         ],
-        "verdadeira": 3,
-        "explicação": "Comentários de linha única em JavaScript são feitos com '//' seguido pelo texto do comentário."
+        "verdadeira": 3
     },
     {
         "id": 20,
@@ -276,8 +257,7 @@
                 "4": "'undefined'"
             }
         ],
-        "verdadeira": 2,
-        "explicação": "Em JavaScript, 'typeof []' retorna 'object' porque arrays são considerados objetos."
+        "verdadeira": 2
     },
     {
         "id": 21,
@@ -290,8 +270,7 @@
                 "4": "Substitui espaços em branco por um caractere específico."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'trim()' remove espaços em branco do início e do fim de uma string."
+        "verdadeira": 2
     },
     {
         "id": 22,
@@ -304,8 +283,7 @@
                 "4": "string.indexOf()"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "O método 'includes()' verifica se uma string contém uma substring específica e retorna 'true' ou 'false'."
+        "verdadeira": 1
     },
     {
         "id": 23,
@@ -318,8 +296,7 @@
                 "4": "func minhaFuncao() {}"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "Funções em JavaScript são definidas usando a palavra-chave 'function', seguida pelo nome da função e um bloco de código."
+        "verdadeira": 1
     },
     {
         "id": 24,
@@ -332,8 +309,7 @@
                 "4": "Adiciona um item ao início do array."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'reduce()' aplica uma função acumuladora a cada elemento de um array, resultando em um único valor."
+        "verdadeira": 2
     },
     {
         "id": 25,
@@ -346,8 +322,7 @@
                 "4": "Verifica a igualdade entre dois valores."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O operador '!' é o operador de negação lógica, que inverte o valor booleano de seu operando."
+        "verdadeira": 2
     },
     {
         "id": 26,
@@ -360,8 +335,7 @@
                 "4": "var obj = create Object();"
             }
         ],
-        "verdadeira": 2,
-        "explicação": "Objetos literais são criados usando a sintaxe de chaves '{}'."
+        "verdadeira": 2
     },
     {
         "id": 27,
@@ -374,8 +348,7 @@
                 "4": "Cria um novo array com elementos que atendem a uma condição."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "O método 'find()' retorna o primeiro elemento do array que satisfaz a condição fornecida por uma função de teste."
+        "verdadeira": 2
     },
     {
         "id": 28,
@@ -388,8 +361,7 @@
                 "4": "'5'"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "A expressão '2 + 3 + '5'' é avaliada como '5' concatenado a '5', resultando em '55'."
+        "verdadeira": 1
     },
     {
         "id": 29,
@@ -402,8 +374,7 @@
                 "4": "array[1]"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "O primeiro elemento de um array é acessado pelo índice 0, como em 'array[0]'."
+        "verdadeira": 1
     },
     {
         "id": 30,
@@ -416,8 +387,7 @@
                 "4": "NaN"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "'3 == 3.0' resulta em 'true' porque o operador '==' compara apenas os valores e não se importa com o tipo."
+        "verdadeira": 1
     },
     {
         "id": 31,
@@ -430,8 +400,7 @@
                 "4": "Substitui todos os elementos do array."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'slice()' retorna uma cópia superficial de uma parte do array sem modificar o array original."
+        "verdadeira": 2
     },
     {
         "id": 32,
@@ -444,8 +413,7 @@
                 "4": "'boolean'"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "Em JavaScript, 'typeof null' retorna 'object', o que é considerado um bug histórico na linguagem."
+        "verdadeira": 1
     },
     {
         "id": 33,
@@ -458,8 +426,7 @@
                 "4": "Adiciona uma substring ao final da string."
             }
         ],
-        "verdadeira": 3,
-        "explicação": "'replace()' substitui a primeira ocorrência de uma substring ou expressão regular por outra string."
+        "verdadeira": 3
     },
     {
         "id": 34,
@@ -472,8 +439,7 @@
                 "4": "Adiciona uma nova chave a um objeto."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'Object.keys()' retorna um array contendo todas as chaves (ou propriedades) próprias enumeráveis de um objeto."
+        "verdadeira": 2
     },
     {
         "id": 35,
@@ -486,8 +452,7 @@
                 "4": "array.constructor === Array"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "A função 'Array.isArray()' é usada para verificar se um valor é um array."
+        "verdadeira": 1
     },
     {
         "id": 36,
@@ -500,8 +465,7 @@
                 "4": "NaN"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "A expressão '[] == ![]' é avaliada como 'true' porque '!' converte o array em um valor booleano e, em seguida, é comparado com um array vazio."
+        "verdadeira": 1
     },
     {
         "id": 37,
@@ -514,8 +478,7 @@
                 "4": "Filtra elementos com base em uma condição."
             }
         ],
-        "verdadeira": 2,
-        "explicação": "'concat()' cria um novo array com os elementos dos arrays e/ou valores passados como argumentos."
+        "verdadeira": 2
     },
     {
         "id": 38,
@@ -528,8 +491,7 @@
                 "4": "repeat (var i = 0; i < 10; i++) {}"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "A sintaxe para criar um loop 'for' é 'for (var i = 0; i < 10; i++) {}', onde você define a variável inicial, condição e incremento."
+        "verdadeira": 1
     },
     {
         "id": 39,
@@ -542,8 +504,7 @@
                 "4": "stringToNumber()"
             }
         ],
-        "verdadeira": 1,
-        "explicação": "Você pode usar 'parseInt()' para converter uma string em um número inteiro ou 'parseFloat()' para um número de ponto flutuante."
+        "verdadeira": 1
     },
     {
         "id": 40,
@@ -556,7 +517,6 @@
                 "4": "Atualiza o protótipo de um objeto."
             }
         ],
-        "verdadeira": 1,
-        "explicação": "'Object.assign()' copia as propriedades de um ou mais objetos de origem para um objeto destino e retorna o objeto destino."
+        "verdadeira": 1
     }
 ]

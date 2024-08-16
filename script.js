@@ -16,9 +16,13 @@ const container = document.querySelector('.container');
 let settingsbtn = document.querySelector('.icoconfig i');
 let settingsarea = document.querySelector('.areanoclick');
 const naoclicavel = document.querySelector('.areanoclick');
+let soundAcerto = new Audio('./audio/acerto.mp3');
+let soundErro = new Audio('./audio/erro.mp3');
+let soundBotao = new Audio('./audio/botao.mp3'); soundBotao.volume = 0.1;
 
 var acertos = parseInt(localStorage.getItem('qntAcertos'));
 var diasJogados = parseInt(localStorage.getItem('diasJogados'));
+let agora = new Date();
 main();
 
 ////////////////// PARTE DO CÓDIGO DEDICADA AO LOCALSTORAGE
@@ -27,7 +31,7 @@ function Tema(){
     if(localStorage.getItem('Tema')!='Padrão' && localStorage.getItem('Tema')!='Dark'){
         localStorage.setItem('Tema','Padrão');
         MudarTema();}
-}
+    }
 
 function contAcertos(){
     if(!localStorage.getItem('qntAcertos')){
@@ -39,9 +43,15 @@ function contAcertos(){
 function qntAcertos(){
         localStorage.setItem('qntAcertos', acertos+=1);
 }
+function porcAcertos(){
+    var porcAcertos = parseInt(localStorage.getItem('qntAcertos'))*100/parseInt(localStorage.getItem('Questoes'));
+    if(isNaN(porcAcertos)){
+        porcAcertos = 0;
+    }
+    localStorage.setItem('porcAcertos', Math.floor(porcAcertos))
+}
 
 function ChecaJogouHoje(){
-    let agora = new Date();
     let diaHoje = `${agora.getDate()}${agora.getMonth()+1}${agora.getFullYear()}`
 
     if(parseInt(localStorage.getItem('diaHoje'))==diaHoje){
@@ -80,6 +90,7 @@ function localStorageNomeUsuario(){
 
 function ChecaTemRegistro(){
     if(!localStorageNomeUsuario()){
+        Sound(soundBotao);
         Register();}
     else{
             BemVindo();}
@@ -188,7 +199,7 @@ function renderizarFoto(){
     img.setAttribute('class', 'imgprofile');
     img.setAttribute('src', `${localStorage.getItem('fotoUser')}`);
     if(!localStorage.getItem('fotoUser')){
-        img.setAttribute('src', 'profile-circle.png');}
+        img.setAttribute('src', './img/profile-circle.png');}
     divFoto.appendChild(img);
     return img;
 }
@@ -234,7 +245,7 @@ function PlacarEstatisticas(){
     divEstatsplus.setAttribute('class', 'divStatusplus');
     divEstats.appendChild(divEstatsplus);
 
-    ImprimeTexto(`SEQUÊNCIA:<br><br>${localStorage.getItem('diasCont') } Dias` , 'textoSTATUS' , divEstats, CorTextoSecundario);
+    ImprimeTexto(`Dia:<br><br>${`${agora.getDate()}/${agora.getMonth()+1}/${agora.getFullYear()}`}` , 'textoSTATUS' , divEstats, CorTextoSecundario);
 
     var divEstatsplus1 = document.createElement('div');
     divEstatsplus1.setAttribute('class', 'divStatusplus');
@@ -245,7 +256,7 @@ function PlacarEstatisticas(){
 ////////////////// PARTE VISUAL DO FRONT
 
 function TelaComeçar(){
-    ImprimeIMG('logo.png', 'logo', container);
+    ImprimeIMG('./img/logo.png', 'logo', container);
     var btnComeçar = Imprime('div','>> COMEÇAR <<', 'botaoComeçar', container, CorTextoPrincipal, CorBotaoPrincipal);
     btnComeçar.addEventListener('click', function(){
         ChecaTemRegistro();})
@@ -288,7 +299,9 @@ function AdicionarFoto(){
 }
 
 function BemVindo(){
+    Sound(soundBotao);
     contAcertos();
+    porcAcertos();
     settingsbtn.style.top="0"; ///// Faz o botao Settings Aparecer
     container.style.justifyContent= 'center';
     ApagarTela();
@@ -390,17 +403,29 @@ function EscutarBotoes(btn1, btn2, btn3, btn4){
     })
 }
 
+function Sound(som){
+        som.currentTime = 0;
+        som.play();
+};
+
 function VerdadeiraFalsa(num, btnclicou){
     RegistraQuestoesRespondidas(questoes+1);
     const buttons = [btn1, btn2, btn3, btn4];
     clicou = true;
     BtnProsseguir();
     if (num === Certa) {
+        ImprimeIMG('./img/confetes.gif', 'confetes', container);
+        setTimeout(() =>{
+            if(container.children.length === 4){
+            container.removeChild(container.lastChild);}
+        }, 700);
+        Sound(soundAcerto);
         btnclicou.style.background = CorBotaoSecundario; // Verde para a resposta correta
         btnclicou.style.animation = 'acertou 1s ease'
         RegistraAltMarcadas(num)
         qntAcertos();
     } else {
+        Sound(soundErro);
         btnclicou.style.background = '#AB3043';
         buttons[Certa-1].style.background = CorBotaoSecundario;
         btnclicou.style.animation = 'errou 1s ease';
@@ -413,6 +438,7 @@ function BtnProsseguir(){
 }
 
 async function PLAY(){
+    Sound(soundBotao);
     ResgataArrayMarcados();
     await obterPerguntaJSON();
     ApagarTela();
