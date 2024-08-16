@@ -418,12 +418,12 @@ function VerdadeiraFalsa(num, btnclicou){
         setTimeout(() =>{
             if(container.children.length === 4){
             container.removeChild(container.lastChild);}
+            RegistraAltMarcadas(num)
+            qntAcertos();
         }, 700);
         Sound(soundAcerto);
         btnclicou.style.background = CorBotaoSecundario; // Verde para a resposta correta
         btnclicou.style.animation = 'acertou 1s ease'
-        RegistraAltMarcadas(num)
-        qntAcertos();
     } else {
         Sound(soundErro);
         btnclicou.style.background = '#AB3043';
