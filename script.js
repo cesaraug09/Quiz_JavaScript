@@ -44,7 +44,7 @@ function qntAcertos(){
         localStorage.setItem('qntAcertos', acertos+=1);
 }
 function porcAcertos(){
-    var porcAcertos = parseInt(localStorage.getItem('qntAcertos'))*100/parseInt(localStorage.getItem('Questoes'));
+    var porcAcertos = parseInt(localStorage.getItem('qntAcertos'))*100/(parseInt(localStorage.getItem('Questoes'))+1);
     if(isNaN(porcAcertos)){
         porcAcertos = 0;
     }
@@ -301,7 +301,6 @@ function AdicionarFoto(){
 function BemVindo(){
     Sound(soundBotao);
     contAcertos();
-    porcAcertos();
     settingsbtn.style.top="0"; ///// Faz o botao Settings Aparecer
     container.style.justifyContent= 'center';
     ApagarTela();
@@ -409,6 +408,7 @@ function Sound(som){
 };
 
 function VerdadeiraFalsa(num, btnclicou){
+    porcAcertos();
     RegistraQuestoesRespondidas(questoes+1);
     const buttons = [btn1, btn2, btn3, btn4];
     clicou = true;
@@ -566,6 +566,7 @@ function FechaMenu(){
 }
 
 async function main(){
+    porcAcertos();
     Tema();
     MudarTema();
     TelaComeçar();
